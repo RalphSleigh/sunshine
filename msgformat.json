@@ -1,0 +1,5 @@
+//contains some misc messages for reference. 
+
+{"msgfor": "slidehandler", "data":
+   {"call":"displayprevslide","data":
+      {"slidetoload":"msg"}}}

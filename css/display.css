@@ -1,0 +1,67 @@
+html,body,p,h1,h2,h3,ul,li {
+margin:0px;
+padding:0px;
+font-family:sans-serif;
+}
+
+.displaywindow .margin {
+padding:10px;
+background:#004400;
+}
+
+.displaywindow .content{
+
+
+font-size:1em;
+color:#ffffff;
+}
+
+.displaywindow .content h1,.displaywindow .content h2{
+
+font-size:120%;
+
+}
+
+.displaywindow .content p {
+//text-align:justify;
+margin:1em;
+color:#ffffff;
+//-webkit-text-stroke-color: #224422;
+//-webkit-text-stroke-width: 1px;
+}
+
+.displaywindow .content ul {
+margin:1em;
+margin-left:2em;
+}
+
+.displaywindow .content h1,.displaywindow .content h2, .content h3,.displaywindow .content h4 {
+margin-left:0.5em;
+}
+
+
+.displaywindow .messageContainer {
+background: rgba(200, 200, 200, 0.5); /* R, G, B, A */
+position:absolute;
+}
+
+#messageDisplayInner  {
+background:#800000;
+margin:10px;
+border-radius:20px;
+padding:15px;
+color:white;
+}
+
+.displaywindow .twitterContainer {
+background: rgba(200, 200, 200, 0.5); /* R, G, B, A */
+position:absolute;
+}
+
+#twitterDisplayInner  {
+background:#16a6ff;
+margin:10px;
+border-radius:20px;
+padding:15px;
+color:white;
+}

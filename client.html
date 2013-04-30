@@ -1,0 +1,115 @@
+<html>
+<head>
+<title>WebSocket</title>
+
+<style>
+ html,body{font:normal 0.9em arial,helvetica;}
+ #log {width:440px; height:200px; border:1px solid #7F9DB9; overflow:auto;}
+ #msg {width:330px;}
+</style>
+
+<script type="text/javascript" charset="utf-8" src="js/prototype/prototype.js" ></script>
+
+<script>
+var socket;
+
+function init(){
+ $("log").innerHTML = "";
+  var host = "ws://192.168.0.1:12345/websocket/server.php";
+  try{
+    socket = new WebSocket(host);
+    log('WebSocket - status '+socket.readyState);
+    
+	socket.onopen    = function(){	
+		info = {id:"testcontrol",roles:["control","display"]};
+		socket.send(Object.toJSON(info));
+		log("Socket Open");
+		};
+	
+	
+    socket.onmessage = function(msg){ log("Received: "+msg.data); };
+    socket.onclose   = function(msg){ 
+	log("Disconnected - status "+this.readyState); 
+	setTimeout(init,1000);
+	};
+  }
+  catch(ex){ log(ex); }
+  $("msg").focus();
+}
+
+function send(){
+  var txt,msg;
+  txt = $("msg");
+  msg = txt.value;
+  if(!msg){ alert("Message can not be empty"); return; }
+  txt.value="";
+  txt.focus();
+  try { 
+  socket.send(msg); 
+  log('Sent: '+msg); 
+  } catch(ex){
+  log(ex); 
+  }
+}
+
+function sendcommand(){
+  var txt,msg;
+  txt = $("slide");
+  msg = txt.value;
+  if(!msg){ alert("Message can not be empty"); return; }
+  txt.focus();
+  
+  info = {"msgfor": "slidehandler", "data":
+   {"call":"displayslide","data":
+      {"slidetoload":msg}
+  }
+};
+  socket.send(Object.toJSON(info));
+  log('Sent: '+Object.toJSON(info)); 
+  }
+
+
+function serverrestart(){
+info = {"msgfor": "server", "data":"restart"};
+
+
+
+socket.send(Object.toJSON(info));
+  log('Sent: '+Object.toJSON(info)); 
+
+}  
+  
+function quit(){
+
+info = {"msgfor": "server", "data":"exit"};
+
+
+
+socket.send(Object.toJSON(info));
+  log('Sent: '+Object.toJSON(info)); 
+
+  log("Goodbye!");
+}
+
+// Utilities
+function log(msg){ $("log").innerHTML+="<br>"+msg; }
+function onkey(event){ 
+
+	if(event.keyCode==13 && event.currentTarget.id=="msg"){ send(); } 
+	if(event.keyCode==13 && event.currentTarget.id=="slide"){ sendcommand(); }
+	
+	}
+</script>
+
+</head>
+<body onload="init()">
+ <h3>WebSocket v2.00</h3>
+ <div id="log"></div>
+ <input id="msg" type="textbox" onkeypress="onkey(event)"/><br />
+ <input id="slide" type="textbox" onkeypress="onkey(event)" value="slides/slide1.html" />
+ <button onclick="sendcommand()">Send</button>
+ <button onclick="quit()">Quit</button>
+ <button onclick="serverrestart()">Restart server</button>
+ <div>Commands: hello, hi, name, age, date, time, thanks, bye</div>
+</body>
+</html>
