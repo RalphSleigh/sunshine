@@ -56,7 +56,7 @@ class Slidehandler{
 		$obj = new stdClass();
 		$obj->clienthandler = 'slideControl';
 		
-		$tree = $this->recurseslidedirectory('slides');
+		$tree = $this->recurseslidedirectory(SLIDE_DIRECTORY);
 
 		$obj->data = new stdClass();
 		
@@ -96,7 +96,7 @@ class Slidehandler{
 
 	function displaynextslide($msg,$fromuser) { //for richards remote, this code sucks, yes, I know.
 		
-		$itt = new RecursiveIteratorIterator( new RecursiveArrayIterator($this->recurseslidedirectory('slides')));
+		$itt = new RecursiveIteratorIterator( new RecursiveArrayIterator($this->recurseslidedirectory(SLIDE_DIRECTORY)));
 		foreach($itt as $item) {
 			
 		if($this->currentslide->filename == $item) {
@@ -129,7 +129,7 @@ class Slidehandler{
 		
 		$prev1 = null;
 		$prev2 = null;
-		$itt = new RecursiveIteratorIterator( new RecursiveArrayIterator($this->recurseslidedirectory('slides')));
+		$itt = new RecursiveIteratorIterator( new RecursiveArrayIterator($this->recurseslidedirectory(SLIDE_DIRECTORY)));
 		foreach($itt as $item) {
 			
 		if($this->currentslide->filename == $item) {
