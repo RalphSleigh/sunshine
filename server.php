@@ -1,5 +1,9 @@
 #!/php -q
-<?php  
+<?php 
+namespace Ralphie\Sunshine;
+require 'vendor/autoload.php';
+
+
 //config
 include "config.php";
 //core websocket stuff
@@ -7,10 +11,10 @@ include "user.class.php";
 //include "websocket.class.php";
 include "class.PHPWebSocket.php";
 //client handlers
-include "display.class.php";
+//include "display.class.php";
 include "control.class.php";
 //content handlers
-include "slidehandler.class.php";
+//include "slidehandler.class.php";
 include "messagehandler.class.php";
 include "twitterhandler.class.php";
 include "videohandler.class.php";
@@ -26,8 +30,10 @@ Abstract class Messageserver{
 	public $clienthandlers;
 	
 	function __construct($address,$port) {
+	
+		echo '"', __NAMESPACE__, '"';
 		$this->debug = true;
-		$this->slidehandler = new slidehandler();
+		$this->slidehandler = new SlideHandler();
 		$this->videohandler = new videohandler();
 		$this->messagehandler = new messagehandler();
 		$this->chathandler = new chathandler();
@@ -212,5 +218,4 @@ function send($socket,$msg) {
 	$this->server->wsSend(parent::getuserbysocket($socket)->clientid, $msg);
 	}
 }
-echo WEBSOCKET_HOST;
 $master = new WebSocket(WEBSOCKET_HOST,WEBSOCKET_PORT);
