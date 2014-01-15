@@ -1,4 +1,5 @@
 <?php
+namespace Ralphie\Sunshine;
 
 class User{
   var $roles = array();

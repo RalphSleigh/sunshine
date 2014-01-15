@@ -1,4 +1,5 @@
 <?php
+namespace Ralphie\Sunshine;
 
 /*
 	Based on PHP WebSocket Server 0.2

@@ -1,24 +1,25 @@
 #!/php -q
 <?php 
 namespace Ralphie\Sunshine;
+use \stdClass;
 require 'vendor/autoload.php';
-
+require "config.php";
 
 //config
-include "config.php";
+
 //core websocket stuff
-include "user.class.php";
+//include "user.class.php";
 //include "websocket.class.php";
-include "class.PHPWebSocket.php";
+//include "class.PHPWebSocket.php";
 //client handlers
 //include "display.class.php";
-include "control.class.php";
+//include "control.class.php";
 //content handlers
 //include "slidehandler.class.php";
-include "messagehandler.class.php";
-include "twitterhandler.class.php";
-include "videohandler.class.php";
-include "chathandler.class.php";
+//include "messagehandler.class.php";
+//include "twitterhandler.class.php";
+//include "videohandler.class.php";
+//include "chathandler.class.php";
 
 Abstract class Messageserver{
 
@@ -31,13 +32,12 @@ Abstract class Messageserver{
 	
 	function __construct($address,$port) {
 	
-		echo '"', __NAMESPACE__, '"';
 		$this->debug = true;
 		$this->slidehandler = new SlideHandler();
-		$this->videohandler = new videohandler();
-		$this->messagehandler = new messagehandler();
-		$this->chathandler = new chathandler();
-		$this->twitterhandler = new twitterhandler();
+		$this->videohandler = new VideoHandler();
+		$this->messagehandler = new MessageHandler();
+		$this->chathandler = new ChatHandler();
+		$this->twitterhandler = new TwitterHandler();
 		
 	}
 	

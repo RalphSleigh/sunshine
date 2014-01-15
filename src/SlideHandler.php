@@ -1,5 +1,7 @@
 <?php 
 namespace Ralphie\Sunshine;
+use \stdClass;
+use \DirectoryIterator;
 /*
 This class contains functionality related to displaying html slides.
 Functions should not directly access the transport layer, to allow it to work on both websocket and ajax connections.

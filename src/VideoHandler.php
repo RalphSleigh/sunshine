@@ -1,9 +1,10 @@
 <?php
+namespace Ralphie\Sunshine;
 /*
 This class contains functionality related to displaying video.
 Functions should not directly access the transport layer, to allow it to work on both websocket and ajax connections.
 */
-class videohandler{
+class VideoHandler{
 	 
 	function processmessage($msg,$fromuser) { //return an array of messages to send id => message
 		
