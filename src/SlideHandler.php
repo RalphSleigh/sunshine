@@ -93,13 +93,13 @@ class SlideHandler{
 		}
 		
 		usort($items,"cmp");
-		print_r($items);
+		//print_r($items);
 		return $items;
 	}
 
 	function displaynextslide($msg,$fromuser) { //for richards remote, this code sucks, yes, I know.
 		
-		$itt = new RecursiveIteratorIterator( new RecursiveArrayIterator($this->recurseslidedirectory(SLIDE_DIRECTORY)));
+		$itt = new \RecursiveIteratorIterator( new \RecursiveArrayIterator($this->recurseslidedirectory(SLIDE_DIRECTORY)));
 		foreach($itt as $item) {
 			
 		if($this->currentslide->filename == $item) {
@@ -132,7 +132,7 @@ class SlideHandler{
 		
 		$prev1 = null;
 		$prev2 = null;
-		$itt = new RecursiveIteratorIterator( new RecursiveArrayIterator($this->recurseslidedirectory(SLIDE_DIRECTORY)));
+		$itt = new \RecursiveIteratorIterator( new \RecursiveArrayIterator($this->recurseslidedirectory(SLIDE_DIRECTORY)));
 		foreach($itt as $item) {
 			
 		if($this->currentslide->filename == $item) {

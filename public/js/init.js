@@ -10,9 +10,10 @@ app.system = (function(){
 		app.ts.init(window.location.hostname,12345);
 		
 		if(window.location.pathname.match('test'))app.bounce.init();
+		if(window.location.pathname.match('slide'))app.slide.init($('body'));
 		
 		//app.slide.init($('body'));
-		//app.ts.addMsgCallback(app.slide.onMessage);	
+			
 	}	
 	
 	module.prettyJSON = function(json) {

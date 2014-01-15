@@ -8,7 +8,7 @@ app.ts = (function(){
 	var module = {}, ws, recList = $.Callbacks();
 	
 	function wsMessage(msg) {
-		recList.fire(msg);
+		recList.fire($.parseJSON(msg.data));
 		}
 		
 	function wsOpen() {

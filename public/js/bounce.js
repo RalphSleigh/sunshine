@@ -1,11 +1,10 @@
-
-
+//this module just makes a simple page to debug the JSON websockets. 
 app.bounce = (function() {
 	
 	var module = {};
 
 	module.onMessage = function(msg) {
-	$('#messagebox')[0].innerHTML = app.system.prettyJSON($.parseJSON(msg.data));
+	$('#messagebox').html = app.system.prettyJSON(msg);
 	}
 
 	module.send = function(){
