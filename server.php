@@ -57,6 +57,7 @@ Abstract class Messageserver{
 		$unencode = json_decode($msg);		
 		$returnmsgs = null;
 		
+		echo $msg;
 		
 		if($unencode && isset($unencode->msgfor)) {
 			switch($unencode->msgfor) {
@@ -68,6 +69,15 @@ Abstract class Messageserver{
 				case 'twitterhandler' : $returnmsgs = $this->twitterhandler->processmessage($unencode->data,$user);  break;
 			}
 		}
+		
+		//ALMIGHTY HACK FOR TRANSITION TO NEW CLIENT CODE:
+		
+		else if($unencode && isset($unencode->bounce)) {
+			foreach($this->users as $user) {
+			$this->send($user->socket,json_encode($unencode));
+			}
+		}
+		
 		else echo "bad JSON or no msgfor \n";
 		
 		if($returnmsgs) { //Loop over list of return messages and send them to any client with matching id/role.
