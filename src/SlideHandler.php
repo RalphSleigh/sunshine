@@ -92,7 +92,7 @@ class SlideHandler{
 			//echo $fileInfo->getFilename() . "<br>\n";
 		}
 		
-		usort($items,"cmp");
+		usort($items,"\Ralphie\Sunshine\cmp");
 		//print_r($items);
 		return $items;
 	}

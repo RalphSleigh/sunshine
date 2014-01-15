@@ -1,6 +1,6 @@
-//this handles client side slide display
+//this handles client side slide display, yup.
 
-app.slide = (function() {
+app.slide = (function(){
 	var module = {}, container,margin,content;
 
  	function displaySlide(msg) {

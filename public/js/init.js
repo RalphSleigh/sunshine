@@ -11,14 +11,13 @@ app.system = (function(){
 		
 		if(window.location.pathname.match('test'))app.bounce.init();
 		if(window.location.pathname.match('slide'))app.slide.init($('body'));
-		
-		//app.slide.init($('body'));
+		if(window.location.pathname.match('dashboard'))app.dash.init();
 			
 	}	
 	
 	module.prettyJSON = function(json) {
 		if (typeof json != 'string') {
-			json = JSON.stringify(json, undefined, 2);
+			json = JSON.stringify(json, "\n", 2);
 		}
 		json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 		return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {

@@ -1,5 +1,8 @@
 {
 	"name": "Ralphie/Sunshine",
+	"require": {
+				"monolog/monolog": "1.7.*@dev"
+				},
 	"autoload": {
         "psr-4": {"Ralphie\\Sunshine\\": "src/"}
     }

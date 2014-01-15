@@ -94,6 +94,7 @@ Abstract class Messageserver{
 				
 				foreach($this->users as $user) {
 					if($user->id == $for){
+						$this->say("> ".json_encode($returnmsg));
 						$this->send($user->socket,json_encode($returnmsg));
 						continue;
 						}
