@@ -1,11 +1,9 @@
 //This will attempt to use websockets to handle transport, but will fallback to XMLHTTPRequest if it cant.
 //todo: AJAX fallback.
 
-
-
 app.ts = (function(){
 
-	var module = {}, ws, recList = $.Callbacks();
+	var module = {}, ws, wsAddress, recList = $.Callbacks();
 	
 	function wsMessage(msg) {
 		recList.fire($.parseJSON(msg.data));
@@ -17,11 +15,20 @@ app.ts = (function(){
 		ws.send(JSON.stringify(reg));
 	}
 	
+	function wsClose() {
+		console.log('socket closed');
+		setTimeout(module.init,2000);
+	
+	}
+	
 	module.init = function(host, port){
-		ws = new WebSocket('ws://'+host+':'+port);
+		console.log('Opening');
+		if(!wsAddress)wsAddress = 'ws://'+host+':'+port;
+		ws = new WebSocket(wsAddress);
 		
 		ws.onopen = wsOpen;
 		ws.onmessage = wsMessage;
+		ws.onclose = wsClose;
 		
 		}
 			
@@ -32,7 +39,6 @@ app.ts = (function(){
 	module.addMsgCallback = function(callback) { //things to do when we get a message
 		recList.add(callback);
 	}
-	
-	
+
 	return module;
 	}());

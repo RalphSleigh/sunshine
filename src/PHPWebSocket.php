@@ -73,6 +73,7 @@ class PHPWebSocket
 	public $wsClientIPCount = array();
 	public $wsOnEvents      = array();
 	public $parobj;
+	public $p;
 
 	/*
 		$this->wsClients[ integer ClientID ] = array(
