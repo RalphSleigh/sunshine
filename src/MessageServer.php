@@ -28,6 +28,11 @@ class MessageServer implements MessageComponentInterface{
 		$p['log']->debug('Done');
 		
 		$this->registerAction('system.getHTMLTemplate',array($this,'getHTMLTemplate'));
+		$this->registerAction('system.registerModes',array($this,'registerModes'));
+		$this->registerAction('system.getClientInfo',array($this,'getClientInfo'));
+		$this->registerAction('system.refreshClient',array($this,'refreshClient'));
+		$this->registerAction('system.restartServer',array($this,'restartServer'));//REFACTORTHIS
+		$this->registerAction('system.shutdownServer',array($this,'shutdownServer'));
 	}
 	
 	public function registerAction($action, callable $method) {
@@ -37,6 +42,11 @@ class MessageServer implements MessageComponentInterface{
 	public function onOpen(ConnectionInterface $conn) {
 		$this->p['log']->notice('New Connection: '.$conn->resourceId);
 		$this->clients[$conn->resourceId] = $conn;
+		$conn->modes = array();
+		
+		//foreach($this->clients as $client) {
+		//	if(in_array('dashboard',$client->modes))$this->getClientInfo($client, null);
+		//	}
     }
 	
 	public function onClose(ConnectionInterface $conn) {
@@ -55,12 +65,13 @@ class MessageServer implements MessageComponentInterface{
 		$message = json_decode($msg);		
 		$returnmsgs = null;
 		
-		$this->p['log']->info('Incoming Message: '.substr($msg,0,20));
+		$this->p['log']->info('Incoming Message: '.substr($msg,0,40));
 			
 		//ALMIGHTY HACK FOR TRANSITION TO NEW CLIENT CODE:
 		
 		if($message && isset($message->action)) {
-			$this->actions[$message->action]($conn, $message); // call right handler
+			if($this->actions[$message->action])$this->actions[$message->action]($conn, $message); // call right handler
+			else $this->p['log']->error('Unknown action: '.$message->action);
 			}
 
 		else if($message && isset($message->bounce)) {
@@ -130,22 +141,48 @@ class MessageServer implements MessageComponentInterface{
 		}
 	}
 	
-	function servermessage($data,$user) {
-	
-		if($data == "restart") {
-			$this->p['log']->warning('SERVER RESTARTING');
-		 /*
-		$WshShell = new COM("WScript.Shell");
-		$oExec = $WshShell->Exec("php server.php");		
-		while($input = $oExec->StdOut->ReadLine())echo $input;
-		//$oExec = $WshShell->Run("php server.php", 1, false);
-		*/
+	public function registerModes($conn, $message) {
+		//$conn->modes[] = $message->mode;  //thios fails becasue of __get/__set redirection apparently.
+		$modes = $conn->modes;
+		foreach($message->modes as $mode)$modes[] = $mode;
+		$conn->modes = $modes;
 		
-			exit(2);
+		foreach($this->clients as $client) {
+			if(in_array('dashboard',$client->modes))$this->getClientInfo($client, null);
+			}
+		
 		}
-		else if($data == "exit") {
-			$this->p['log']->warning('SERVER SHUTTING DOWN');
-			exit(0);
+	
+	public function getClientInfo($conn, $message) {
+		$return = new stdClass();
+		foreach($this->clients as $resource => $client){
+			$clientobj = new stdClass();
+			$clientobj->resourceId = $resource;
+			$clientobj->remoteAddress = $client->remoteAddress;
+			$clientobj->modes = $client->modes;
+			if($client == $conn)$clientobj->me = true;
+			$return->clients[] = $clientobj;		
+			}
+		$return->action = "dash.displayClientInfo";
+		$conn->send(json_encode($return));
+	}
+	
+	public function refreshClient($conn, $message) {
+		if($this->clients[$message->clientId]) {
+			$return = new stdClass();
+			$return->action = 'system.refresh';
+			$this->p['log']->notice('Refreshing: '.$message->clientId);
+			$this->clients[$message->clientId]->send(json_encode($return));
 		}
+	}
+		
+	public function restartServer($conn, $message) {
+		$this->p['log']->warning('SERVER RESTARTING');
+		exit(2);
+	}
+	
+	public function shutdownServer($conn, $message) {
+		$this->p['log']->warning('SERVER SHUTTING DOWN');
+		exit(0);
 	}
 }

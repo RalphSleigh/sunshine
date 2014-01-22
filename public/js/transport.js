@@ -13,6 +13,7 @@ app.ts = (function(){
 		console.log('socket opened');
 		//var reg = {id:"hi",roles:["display"]};
 		//.send(JSON.stringify(reg));
+		app.system.updateModes();
 		app.ts.processQueue();
 	}
 	
@@ -34,7 +35,11 @@ app.ts = (function(){
 	}
 			
 	module.send = function(payload) {
-		if(ws.readyState == ws.OPEN) ws.send(JSON.stringify(payload));
+		if(ws.readyState == ws.OPEN) {
+			console.log('Sending: ');
+			console.log(payload);
+			ws.send(JSON.stringify(payload));
+		}
 		else sendQueue.push(payload);
 	}
 		

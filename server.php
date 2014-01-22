@@ -41,5 +41,3 @@ $server = IoServer::factory(
     );
 
 $server->run();
-
-//$master = new WebSocket($p,WEBSOCKET_HOST,WEBSOCKET_PORT);

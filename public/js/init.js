@@ -3,7 +3,7 @@
 var app = {};
 
 app.system = (function(){
-	var module = {};
+	var module = {},modes = [];
 	
 	module.init = function(){
 	
@@ -35,6 +35,19 @@ app.system = (function(){
 		}
 	}
 	
+	module.addMode = function(mode) {
+		modes.push(mode);
+		this.updateModes();
+	}
+		
+	module.updateModes = function() {
+	if(modes.length > 0)app.ts.send({"action":"system.registerModes","modes":modes});//let server know what we are.
+	}
+	
+	module.refresh = function() {
+		location.reload(true);
+	}
+	
 	module.prettyJSON = function(json) {
 		if (typeof json != 'string') {
 			json = JSON.stringify(json, "\n", 2);
@@ -61,3 +74,12 @@ app.system = (function(){
 }());
 
 $(app.system.init);
+
+String.prototype.format = function () {
+  var args = arguments;
+  return this.replace(/\{\{|\}\}|\{(\d+)\}/g, function (m, n) {
+    if (m == "{{") { return "{"; }
+    if (m == "}}") { return "}"; }
+    return args[n];
+  });
+};
