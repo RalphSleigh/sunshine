@@ -3,7 +3,7 @@
 
 app.ts = (function(){
 
-	var module = {}, ws, wsAddress, recList = $.Callbacks();
+	var module = {}, ws, wsAddress, recList = $.Callbacks(), sendQueue = [];
 	
 	function wsMessage(msg) {
 		recList.fire($.parseJSON(msg.data));
@@ -11,8 +11,9 @@ app.ts = (function(){
 		
 	function wsOpen() {
 		console.log('socket opened');
-		var reg = {id:"hi",roles:["display"]};
-		ws.send(JSON.stringify(reg));
+		//var reg = {id:"hi",roles:["display"]};
+		//.send(JSON.stringify(reg));
+		app.ts.processQueue();
 	}
 	
 	function wsClose() {
@@ -30,14 +31,22 @@ app.ts = (function(){
 		ws.onmessage = wsMessage;
 		ws.onclose = wsClose;
 		
-		}
+	}
 			
 	module.send = function(payload) {
-		ws.send(JSON.stringify(payload));
-		}
+		if(ws.readyState == ws.OPEN) ws.send(JSON.stringify(payload));
+		else sendQueue.push(payload);
+	}
 		
 	module.addMsgCallback = function(callback) { //things to do when we get a message
 		recList.add(callback);
+	}
+	
+	module.processQueue = function() {
+		var item;
+		while(item = sendQueue.pop()) {
+			this.send(item);
+		}
 	}
 
 	return module;

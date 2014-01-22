@@ -3,6 +3,10 @@
 namespace Ralphie\Sunshine;
 use \stdClass;
 
+use Ratchet\Server\IoServer;
+use Ratchet\Http\HttpServer;
+use Ratchet\WebSocket\WsServer;
+
 require 'vendor/autoload.php';
 require "config.php";
 
@@ -16,7 +20,7 @@ $p['log'] = $p->share(function ($p) {
 		$handle->setFormatter(new MonologCliFormatter());
 		$logger->pushHandler($handle);
 		
-		\Monolog\ErrorHandler::register($logger);
+		\Monolog\ErrorHandler::register($logger,array(),\Psr\Log\LogLevel::ERROR);
 		error_reporting(0);
 		
 		return $logger;
@@ -24,4 +28,18 @@ $p['log'] = $p->share(function ($p) {
 
 $p['log']->info('Logging is go');
 
-$master = new WebSocket($p,WEBSOCKET_HOST,WEBSOCKET_PORT);
+$p['ms'] = $p->share(function ($p) {
+	return new MessageServer($p);
+	});
+
+
+$server = IoServer::factory(
+		new HttpServer(
+            new WsServer($p['ms'])
+					),
+        WEBSOCKET_PORT
+    );
+
+$server->run();
+
+//$master = new WebSocket($p,WEBSOCKET_HOST,WEBSOCKET_PORT);

@@ -1,18 +1,21 @@
 <?php
 namespace Ralphie\Sunshine;
 use \stdClass;
-//This is abstract because needed to change backend, should tidy this up and refactor at some point.
+use Ratchet\MessageComponentInterface;
+use Ratchet\ConnectionInterface;
 
-Abstract class MessageServer{
 
+
+class MessageServer implements MessageComponentInterface{
 	
-
 	public $slidehandler;
 	public $videohandler;
 	//client handlers stored seperatly so functionality can be reused by ajax backend
 	public $clienthandlers;
+	public $clients = array();
+	public $actions = array();
 	
-	function __construct($p, $address,$port) {
+	public function __construct($p) {
 		
 		$p['log']->debug('Creating Handlers');
 		$this->p = $p;
@@ -23,46 +26,53 @@ Abstract class MessageServer{
 		$this->chathandler = new ChatHandler();
 		$this->twitterhandler = new TwitterHandler();
 		$p['log']->debug('Done');
+		
+		$this->registerAction('system.getHTMLTemplate',array($this,'getHTMLTemplate'));
 	}
 	
-	function     say($msg=""){ echo $msg."\n"; }
+	public function registerAction($action, callable $method) {
+	$this->actions[$action] = $method;
+	}
 	
-	function process($user,$msg){ //called on every message
-  
-		//$this->say("< ".$msg);
+	public function onOpen(ConnectionInterface $conn) {
+		$this->p['log']->notice('New Connection: '.$conn->resourceId);
+		$this->clients[$conn->resourceId] = $conn;
+    }
 	
-		if(empty($user->roles)){ //first read from a new connection, establish what it is.
-			$this->upgradeuser($user,$msg);//read type from message, create the right client handlers.
-			return;
-		}
-		
+	public function onClose(ConnectionInterface $conn) {
+		$this->p['log']->notice('Disconnected: '.$conn->resourceId);
+		unset($this->clients[$conn->resourceId]);
+    }
+
+    public function onError(ConnectionInterface $conn, \Exception $e) {
+		throw $e; //this is not a very good idea, exception will end up in the log.
+    }
+	
+	public function onMessage(ConnectionInterface $conn, $msg){ //called on every message
+			
 		//message should be json object, 2 properties. msgfor->handler and data is passed through.
 		
-		$unencode = json_decode($msg);		
+		$message = json_decode($msg);		
 		$returnmsgs = null;
 		
 		$this->p['log']->info('Incoming Message: '.substr($msg,0,20));
-		
-		//echo $msg;
-		
+			
 		//ALMIGHTY HACK FOR TRANSITION TO NEW CLIENT CODE:
 		
-		if($unencode && isset($unencode->action)) {//new style router? should probably get something awesome here with callables an stuff.
-			switch($unencode->action) {
-				case 'getHTMLTemplate' : $returnmsgs = $this->getHTMLTemplate($user, $unencode); break; // some default system class really here.
+		if($message && isset($message->action)) {
+			$this->actions[$message->action]($conn, $message); // call right handler
 			}
-		}
-		
-		else if($unencode && isset($unencode->bounce)) {
-			foreach($this->users as $user) {
-			$this->send($user->socket,json_encode($unencode));
+
+		else if($message && isset($message->bounce)) {
+			foreach($this->clients as $client) {
+			$client->send(json_encode($message));
 			}
 		}
 		
 		//ORIGINAL SERVER CODE
 		
-		 else if($unencode && isset($unencode->msgfor)) {
-			switch($unencode->msgfor) {
+		 else if($message && isset($message->msgfor)) {
+			switch($message->msgfor) {
 				case 'server' : $returnmsgs = $this->servermessage($unencode->data,$user);  break; //handle messages for the server.
 				case 'slidehandler' : $returnmsgs = $this->slidehandler->processmessage($unencode->data,$user);  break;
 				case 'videohandler' : $returnmsgs = $this->videohandler->processmessage($unencode->data,$user);  break;
@@ -73,8 +83,9 @@ Abstract class MessageServer{
 		}
 		
 		
-		
 		else $this->p['log']->error('Malformed Message: '.substr($msg,0,20));
+		
+		//$this->p['log']->info('Finished processing message');
 		
 		if($returnmsgs) { //Loop over list of return messages and send them to any client with matching id/role.
 			//print_r($returnmsgs);
@@ -100,75 +111,23 @@ Abstract class MessageServer{
 		}
 	}
    
-   function upgradeuser($user, $msg) {
-		$info = json_decode($msg);
-		
-		if(isset($info->id) && is_array($info->roles)) {
-			//echo var_dump($user->clientid);
-			$this->p['log']->notice('New Connection id: '.$user->clientid);
-			foreach($info->roles as $role) {
-			
-				switch($role) {
-					case 'display' : $this->clienthandlers[$info->id][$role] = new Control($info->id);  break;
-					case 'control' : $this->clienthandlers[$info->id][$role] = new Display($info->id);  break;
-					}
-				}
-				
-			$user->roles = $info->roles;
-			$user->id = $info->id;
-		}
-		else {
-				$this->send($user->socket,"bad registration, disconnecting \n");
-				$this->disconnect($user->socket);
-		}
-	}
-	
-	function getuserbyid($id){ //get user who has an id.
-		$found=null;
-		foreach($this->users as $user){
-			if($user->id==$id){ $found=$user; break; }
-			}
-		return $found;
-		}
-		
-	function getuserbysocket($socket){ //get user who has an id.
-		$found=null;
-		foreach($this->users as $user){
-			if($user->socket==$socket){ $found=$user; break; }
-			}
-		return $found;
-		}
-	
-	function getusershaverole($role){ //get an array of all users who have a role 
-		$found=array();
-		foreach($this->users as $user){
-			if(in_array($role,$user->roles))$found[] = $user;
-			}
-		return $found;
-		}
-		
-	function getHTMLTemplate($user, $message) { 
-	
+	function getHTMLTemplate($conn, $message) { 
 		$obj = new stdClass();
 		if (preg_match('/^[A-Z0-9]+$/i', $message->template)) {
 			# Have alphanumeric request
-			$file = new \SplFileObject('templates/'.$message->template.'.html');
+			$file = new \SplFileInfo('templates/'.$message->template.'.html');
 				if($file->isFile())
 					{
+					# Is actually a file we can send
 					$obj->templateHTML = file_get_contents($file->getPathname());
-					$obj->action = 'system.template';
+					$obj->action = $message->call;
+					$conn->send(json_encode($obj));
 					} else {
 					$this->p['log']->error('Template not found '.$file->getPathname());
 					}
 			} else {
 			$this->p['log']->error('Invalid template requested '.$message->template);
 		}
-		
-		
-		
-		$returnmsg[$user->id] = $obj;
-		
-		return $returnmsg;
 	}
 	
 	function servermessage($data,$user) {

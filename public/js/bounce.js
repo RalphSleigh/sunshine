@@ -4,7 +4,7 @@ app.bounce = (function() {
 	var module = {};
 
 	module.onMessage = function(msg) {
-	$('#messagebox').html(app.system.prettyJSON(msg));
+		$('#messagebox').html(app.system.prettyJSON(msg));
 	}
 
 	module.send = function(){

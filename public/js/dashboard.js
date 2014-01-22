@@ -6,8 +6,15 @@ app.dash = (function(){
 	
 	module.init = function(){
 		//oh lordie
+		var request = {};
+		request.action = "system.getHTMLTemplate";
+		request.template = "dashboard";
+		request.call = "dash.installHTML";
+		app.ts.send(request);
+	}
 	
-	
+	module.installHTML = function(msg){
+		$('body').html(msg.templateHTML);
 	}
 	
 	return module;
