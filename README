@@ -1,8 +1,12 @@
-This is pretty gnarly code. Point Apache at the directory and launch server.sh from the command line.
+This is a networked conferencing tool designed for Woodcraft Folk's annual gathering, can display HTML slides/notices and provides a networked text chat system.
 
-Good luck!
+Currently being re-written, lots of things to don't work, but in general:
 
-Contains Prototype, jQuery, RaphealJS and Flynsarmy / PHPWebSocket-Chat. Cheers to the peoples who made them.
+1) Update composer to pull in required vendor files
+2) point apache at the public directory
+3) run server.sh to start the websocket server, it listens on 12345.
+4) hit up /dashboard/ or /slides/ in your www client (latest chrome supported, should work in others but on your own).
+
 
 -Ralph Sleigh
 
