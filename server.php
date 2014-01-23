@@ -1,8 +1,8 @@
 #!/php -q
-<?php 
+<?php  
 namespace Ralphie\Sunshine;
 use \stdClass;
-
+ 
 use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;

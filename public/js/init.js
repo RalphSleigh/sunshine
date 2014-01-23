@@ -1,7 +1,7 @@
 ﻿//Stuff
-
+ 
 var app = {};
-
+ 
 app.system = (function(){
 	var module = {},modes = [];
 	

@@ -1,5 +1,5 @@
 //this handles client side slide display, yup.
-
+  
 app.slide = (function(){
 	var module = {}, container,margin,content;
 

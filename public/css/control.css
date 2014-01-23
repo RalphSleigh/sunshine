@@ -1,0 +1,47 @@
+html,body,p,h1,h2,h3,ul,li {
+margin:0px;
+padding:0px;
+font-family:sans-serif;
+}
+
+.layouttable {
+width:100%;
+}
+
+.layouttable td {
+vertical-align:top;
+}
+
+.slideitem , .subslideitem{
+padding:3px;
+background:#ffdddd;
+margin:3px;
+border:1px solid #cccccc;
+}
+
+.subslideitem {
+margin-left:5px;
+background:#ddddff
+}
+
+.floatright{
+float:right;
+width:30%;
+}
+
+.windowcell {
+width:480px;
+/* position: fixed; */
+}
+
+#livewindow,#previewwindow {
+width:480px;
+height:360px;
+border:1px solid #000;
+background:#ffffff;
+}
+
+#slidecontrol {
+height: 400px;
+overflow: scroll;
+}

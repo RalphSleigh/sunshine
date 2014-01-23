@@ -1,4 +1,4 @@
-<?php
+<?php 
 namespace Ralphie\Sunshine;
 use \stdClass;
 use Ratchet\MessageComponentInterface;
@@ -7,7 +7,7 @@ use Ratchet\ConnectionInterface;
 
 
 class MessageServer implements MessageComponentInterface{
-	
+	 
 	public $slidehandler;
 	public $videohandler;
 	//client handlers stored seperatly so functionality can be reused by ajax backend

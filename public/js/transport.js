@@ -1,8 +1,8 @@
 //This will attempt to use websockets to handle transport, but will fallback to XMLHTTPRequest if it cant.
 //todo: AJAX fallback.
-
+ 
 app.ts = (function(){
-
+ 
 	var module = {}, ws, wsAddress, recList = $.Callbacks(), sendQueue = [], whenOpenList = $.Deferred();
 	
 	function wsMessage(msg) {
