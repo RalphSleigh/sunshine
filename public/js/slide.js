@@ -11,8 +11,9 @@ app.slide = (function(){
 		//alert(data);
 	}
 	
-	module.init = function(domNode) {
-		container = domNode;//store this
+	module.init = function() {
+		console.log('slide init');
+		container = $('body');//hack for now
 		
 		//make some DIVs
 		margin = $('<div class="margin"></div>');
@@ -21,8 +22,7 @@ app.slide = (function(){
 		margin.append(content);
 		container.addClass('displaywindow');
 		
-		app.ts.addMsgCallback(app.slide.onMessage);//register for messages
-		
+		app.system.addMode('slides');
 		
 		}
 

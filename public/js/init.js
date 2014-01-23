@@ -1,4 +1,4 @@
-//Stuff
+﻿//Stuff
 
 var app = {};
 
@@ -10,9 +10,8 @@ app.system = (function(){
 		app.ts.init(window.location.hostname,12345);
 		app.ts.addMsgCallback(module.onMessage); //generic action handler.
 		
-		if(window.location.pathname.match('test'))app.bounce.init();
-		if(window.location.pathname.match('slide'))app.slide.init($('body'));
-		if(window.location.pathname.match('dashboard'))app.dash.init();
+		if(window.location.pathname.match('slide'))app.ts.addOpenCallback(app.slide.init);
+		else if(window.location.pathname.match('dashboard'))app.dash.init();
 			
 	}	
 	

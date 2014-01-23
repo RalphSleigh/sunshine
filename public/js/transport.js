@@ -3,7 +3,7 @@
 
 app.ts = (function(){
 
-	var module = {}, ws, wsAddress, recList = $.Callbacks(), sendQueue = [];
+	var module = {}, ws, wsAddress, recList = $.Callbacks(), sendQueue = [], whenOpenList = $.Deferred();
 	
 	function wsMessage(msg) {
 		recList.fire($.parseJSON(msg.data));
@@ -11,16 +11,25 @@ app.ts = (function(){
 		
 	function wsOpen() {
 		console.log('socket opened');
-		//var reg = {id:"hi",roles:["display"]};
-		//.send(JSON.stringify(reg));
+
 		app.system.updateModes();
-		app.ts.processQueue();
+		processQueue();
+		
+		whenOpenList.resolve(); //call anything waiting for an open connection.
 	}
 	
 	function wsClose() {
 		console.log('socket closed');
+		whenOpenList = $.Deferred();
 		setTimeout(module.init,2000);
 	
+	}
+	
+	function processQueue() {
+		var item;
+		while(item = sendQueue.pop()) {
+			module.send(item);
+		}
 	}
 	
 	module.init = function(host, port){
@@ -47,12 +56,10 @@ app.ts = (function(){
 		recList.add(callback);
 	}
 	
-	module.processQueue = function() {
-		var item;
-		while(item = sendQueue.pop()) {
-			this.send(item);
-		}
+	module.addOpenCallback = function(callback) {
+		whenOpenList.done(callback);
 	}
+	
 
 	return module;
 	}());

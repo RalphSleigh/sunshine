@@ -1,3 +1,6 @@
+<?php
+header('Content-Type: text/html; charset=utf-8');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +14,6 @@
 
 <script type="text/javascript" src="/js/init.js"></script>
 <script type="text/javascript" src="/js/transport.js"></script>
-<script type="text/javascript" src="/js/bounce.js"></script>
 <script type="text/javascript" src="/js/slide.js"></script>
 <script type="text/javascript" src="/js/dashboard.js"></script>
 

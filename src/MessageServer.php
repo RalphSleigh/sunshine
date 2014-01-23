@@ -40,7 +40,7 @@ class MessageServer implements MessageComponentInterface{
 	}
 	
 	public function onOpen(ConnectionInterface $conn) {
-		$this->p['log']->notice('New Connection: '.$conn->resourceId);
+		$this->p['log']->notice('New Connection: '.$conn->remoteAddress.' '.$conn->resourceId);
 		$this->clients[$conn->resourceId] = $conn;
 		$conn->modes = array();
 		
@@ -50,7 +50,7 @@ class MessageServer implements MessageComponentInterface{
     }
 	
 	public function onClose(ConnectionInterface $conn) {
-		$this->p['log']->notice('Disconnected: '.$conn->resourceId);
+		$this->p['log']->notice('Disconnected: '.$conn->remoteAddress.' '.$conn->resourceId);
 		unset($this->clients[$conn->resourceId]);
     }
 
@@ -67,18 +67,20 @@ class MessageServer implements MessageComponentInterface{
 		
 		$this->p['log']->info('Incoming Message: '.substr($msg,0,40));
 			
-		//ALMIGHTY HACK FOR TRANSITION TO NEW CLIENT CODE:
+		//New server code:
 		
-		if($message && isset($message->action)) {
-			if($this->actions[$message->action])$this->actions[$message->action]($conn, $message); // call right handler
-			else $this->p['log']->error('Unknown action: '.$message->action);
-			}
-
-		else if($message && isset($message->bounce)) {
+		if($message && isset($message->bounce)) { //debugging send bounce messages to everyone
 			foreach($this->clients as $client) {
 			$client->send(json_encode($message));
 			}
 		}
+		
+		else if($message && isset($message->action)) {
+			if($this->actions[$message->action])$this->actions[$message->action]($conn, $message); // call right handler
+			else $this->p['log']->error('Unknown action: '.$message->action);
+			}
+
+		
 		
 		//ORIGINAL SERVER CODE
 		

@@ -16,6 +16,11 @@ app.dash = (function(){
 		if(confirm("Are you sure you wish to restart the server? It won't come back"))app.ts.send({"action":"system.shutdownServer"});
 	}
 	
+	function JSONSendButton(){	
+		var data = $('#system-json-send').val();
+		app.ts.send($.parseJSON(data));
+	}
+	
 	//function client
 	
 	module.init = function(){
@@ -34,6 +39,10 @@ app.dash = (function(){
 		$('body').html(msg.templateHTML);
 		$('body').addClass('dashboard');
 		
+		$('#system-server-restart').click(serverRestartButton);
+		$('#system-server-shutdown').click(serverShutdownButton);
+		$('#system-JSON-send').click(JSONSendButton);
+		
 		app.system.addMode('dashboard');
 		app.ts.send({"action":"system.getClientInfo"});//update the client info
 	}
@@ -51,10 +60,6 @@ app.dash = (function(){
 		
 		$('.clientRefreshButton').click(clientRefreshButton);	
 		$('#system-clients-connected').html('  {0} connected'.format(msg.clients.length));
-		
-		$('#system-server-restart').click(serverRestartButton);
-		$('#system-server-shutdown').click(serverShutdownButton);
-		
 		}
 	
 	
