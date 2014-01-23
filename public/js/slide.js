@@ -3,14 +3,6 @@
 app.slide = (function(){
 	var module = {}, container,margin,content;
 
- 	function displaySlide(msg) {
-		
-		content.html(msg.slideHTML);
-		//need to resize here so it fits cool.
-	
-		//alert(data);
-	}
-	
 	module.init = function() {
 		console.log('slide init');
 		container = $('body');//hack for now
@@ -26,11 +18,15 @@ app.slide = (function(){
 		
 		}
 
+	module.displaySlide = function(msg) {
+		content.html(msg.slideHTML);
+	}
+	/*	
 	module.onMessage = function(msg) {
 	
 		if(msg.action == 'slide.display') displaySlide(msg);
 	
 	}
-		
+	*/
 	return module;
 })();
