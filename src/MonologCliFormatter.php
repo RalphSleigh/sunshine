@@ -25,14 +25,17 @@ class MonologCliFormatter extends NormalizerFormatter
         LOGGER::EMERGENCY => array('1;37','41'), // White/Red
      );
     
+
+	
     /**
      * {@inheritdoc}
      */
     public function format(array $record)
     {
- 
+		
         $record = parent::format($record);
        
+	   if (isset($record['context']['exception']))$record['message'] = $record['context']['exception']['message'];
         $lines = array(
 			str_pad(Logger::getLevelName($record['level']).':',9).$record['message'],
                   

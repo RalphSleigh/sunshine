@@ -12,30 +12,22 @@ require "config.php";
 
 //THIS BIT RUNS.
 
-$p = new \Pimple();
+$a = new \Auryn\Provider;
+//this is kind of ugly, should be a better way to configure the logger.
+$logger = new \Monolog\Logger('log');
+$handle = new \Monolog\Handler\StreamHandler('php://stdout');
+$handle->setFormatter(new MonologCliFormatter());
+$logger->pushHandler($handle);
+\Monolog\ErrorHandler::register($logger,array(),\Psr\Log\LogLevel::ERROR);
+error_reporting(0);
 
-$p['log'] = $p->share(function ($p) {
-		$logger = new \Monolog\Logger('log');
-		$handle = new \Monolog\Handler\StreamHandler('php://stdout');
-		$handle->setFormatter(new MonologCliFormatter());
-		$logger->pushHandler($handle);
-		
-		\Monolog\ErrorHandler::register($logger,array(),\Psr\Log\LogLevel::ERROR);
-		error_reporting(0);
-		
-		return $logger;
-	});
+$a->share($logger);
 
-$p['log']->info('Logging is go');
-
-$p['ms'] = $p->share(function ($p) {
-	return new MessageServer($p);
-	});
-
+$logger->info('Logging is go');
 
 $server = IoServer::factory(
 		new HttpServer(
-            new WsServer($p['ms'])
+            new WsServer($a->make('\Ralphie\Sunshine\MessageServer'))
 					),
         WEBSOCKET_PORT
     );

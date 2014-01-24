@@ -2,11 +2,11 @@
 	"name": "Ralphie/Sunshine",
 	"require": {
 				"monolog/monolog": "1.7.*@dev",
-				"pimple/pimple": "2.0.*@dev",
-				"cboden/Ratchet": "0.3.*"
+				"cboden/Ratchet": "0.3.*",
+				"rdlowrey/auryn": "dev-master"
 				},
 	"autoload": {
-        "psr-4": {"Ralphie\\Sunshine\\": "src/"}
+        "psr-4": {"Ralphie\\Sunshine\\": "src/"}}
     }
 
 }

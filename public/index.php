@@ -6,10 +6,13 @@ header('Content-Type: text/html; charset=utf-8');
 <head>
 
 <link href="/css/bootstrap.css" rel="stylesheet">
+<link href="/css/jstree.min.css" rel="stylesheet">
+
 <link href="/css/display.css" rel="stylesheet">
 <link href="/css/dashboard.css" rel="stylesheet">
 
 <script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jstree.min.js"></script>
 <script src="/js/bootstrap.js"></script>
 
 <script type="text/javascript" src="/js/init.js"></script>

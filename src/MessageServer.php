@@ -8,39 +8,47 @@ use Ratchet\ConnectionInterface;
 
 class MessageServer implements MessageComponentInterface{
 	 
-	public $slidehandler;
-	public $videohandler;
-	//client handlers stored seperatly so functionality can be reused by ajax backend
-	public $clienthandlers;
 	public $clients = array();
 	public $actions = array();
 	
-	public function __construct($p) {
+	public function __construct(
+		\Monolog\Logger $logger,
+		\Ralphie\Sunshine\ActionRouter $router
+		){
 		
-		$p['log']->debug('Creating Handlers');
-		$this->p = $p;
-		$this->debug = true;
+		$this->log = $logger;
+		$this->router = $router;
+		
+		$this->router->setMS($this);//OH NOES! Circular dependency! Need to factor out both the clients array and system commands to resolve.
+		
+		/*
 		$this->slidehandler = new SlideHandler();
 		$this->videohandler = new VideoHandler();
 		$this->messagehandler = new MessageHandler();
 		$this->chathandler = new ChatHandler();
 		$this->twitterhandler = new TwitterHandler();
-		$p['log']->debug('Done');
-		
+		*/
+
+		/*
 		$this->registerAction('system.getHTMLTemplate',array($this,'getHTMLTemplate'));
 		$this->registerAction('system.registerModes',array($this,'registerModes'));
 		$this->registerAction('system.getClientInfo',array($this,'getClientInfo'));
 		$this->registerAction('system.refreshClient',array($this,'refreshClient'));
 		$this->registerAction('system.restartServer',array($this,'restartServer'));//REFACTORTHIS
 		$this->registerAction('system.shutdownServer',array($this,'shutdownServer'));
+		*/
+				
+		$this->log->debug('MessageServer Constructed');
+		$this->log->Info('Looping!');
 	}
-	
+	/*
 	public function registerAction($action, callable $method) {
 	$this->actions[$action] = $method;
 	}
+	*/
 	
 	public function onOpen(ConnectionInterface $conn) {
-		$this->p['log']->notice('New Connection: '.$conn->remoteAddress.' '.$conn->resourceId);
+		$this->log->notice('New Connection: '.$conn->remoteAddress.' '.$conn->resourceId);
 		$this->clients[$conn->resourceId] = $conn;
 		$conn->modes = array();
 		
@@ -50,7 +58,7 @@ class MessageServer implements MessageComponentInterface{
     }
 	
 	public function onClose(ConnectionInterface $conn) {
-		$this->p['log']->notice('Disconnected: '.$conn->remoteAddress.' '.$conn->resourceId);
+		$this->log->notice('Disconnected: '.$conn->remoteAddress.' '.$conn->resourceId);
 		unset($this->clients[$conn->resourceId]);
     }
 
@@ -63,9 +71,9 @@ class MessageServer implements MessageComponentInterface{
 		//message should be json object, 2 properties. msgfor->handler and data is passed through.
 		
 		$message = json_decode($msg);		
-		$returnmsgs = null;
+		//$returnmsgs = null;
 		
-		$this->p['log']->info('Incoming Message: '.substr($msg,0,40));
+		$this->log->info('Incoming Message: '.substr($msg,0,40));
 			
 		//New server code:
 		
@@ -75,15 +83,17 @@ class MessageServer implements MessageComponentInterface{
 			}
 		}
 		
+		$this->router->route($conn,$message);
+		/*
 		else if($message && isset($message->action)) {
 			if($this->actions[$message->action])$this->actions[$message->action]($conn, $message); // call right handler
 			else $this->p['log']->error('Unknown action: '.$message->action);
 			}
-
+		*/
 		
 		
 		//ORIGINAL SERVER CODE
-		
+		/*
 		 else if($message && isset($message->msgfor)) {
 			switch($message->msgfor) {
 				case 'server' : $returnmsgs = $this->servermessage($unencode->data,$user);  break; //handle messages for the server.
@@ -94,12 +104,12 @@ class MessageServer implements MessageComponentInterface{
 				case 'twitterhandler' : $returnmsgs = $this->twitterhandler->processmessage($unencode->data,$user);  break;
 			}
 		}
+		*/
 		
-		
-		else $this->p['log']->error('Malformed Message: '.substr($msg,0,20));
+		//else $this->p['log']->error('Malformed Message: '.substr($msg,0,20));
 		
 		//$this->p['log']->info('Finished processing message');
-		
+		/*
 		if($returnmsgs) { //Loop over list of return messages and send them to any client with matching id/role.
 			//print_r($returnmsgs);
 			foreach($returnmsgs as $for => $returnmsg) { 			
@@ -107,7 +117,7 @@ class MessageServer implements MessageComponentInterface{
 				$returnuser = $this->getuserbyid($for);
 				if($returnuser)$this->send($returnuser->socket,json_encode($returnmsg));
 				foreach($this->getusershaverole($for) as $returnuser)$this->send($returnuser->socket,json_encode($returnmsg));
-				*/
+				
 				//lets make this only send each message to each user once
 				
 				
@@ -122,6 +132,7 @@ class MessageServer implements MessageComponentInterface{
 				}
 			}
 		}
+		*/
 	}
    
 	function getHTMLTemplate($conn, $message) { 
@@ -136,10 +147,10 @@ class MessageServer implements MessageComponentInterface{
 					$obj->action = $message->call;
 					$conn->send(json_encode($obj));
 					} else {
-					$this->p['log']->error('Template not found '.$file->getPathname());
+					$this->log->error('Template not found '.$file->getPathname());
 					}
 			} else {
-			$this->p['log']->error('Invalid template requested '.$message->template);
+			$this->log->error('Invalid template requested '.$message->template);
 		}
 	}
 	
@@ -173,18 +184,18 @@ class MessageServer implements MessageComponentInterface{
 		if($this->clients[$message->clientId]) {
 			$return = new stdClass();
 			$return->action = 'system.refresh';
-			$this->p['log']->notice('Refreshing: '.$message->clientId);
+			$this->log->notice('Refreshing: '.$message->clientId);
 			$this->clients[$message->clientId]->send(json_encode($return));
 		}
 	}
 		
 	public function restartServer($conn, $message) {
-		$this->p['log']->warning('SERVER RESTARTING');
+		$this->log->warning('SERVER RESTARTING');
 		exit(2);
 	}
 	
 	public function shutdownServer($conn, $message) {
-		$this->p['log']->warning('SERVER SHUTTING DOWN');
+		$this->log->warning('SERVER SHUTTING DOWN');
 		exit(0);
 	}
 }

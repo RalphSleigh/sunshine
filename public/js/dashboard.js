@@ -62,6 +62,11 @@ app.dash = (function(){
 		$('#system-clients-connected').html('  {0} connected'.format(msg.clients.length));
 		}
 	
+	module.displaySlideTree = function(msg) {
+	
+	
+		$('#slides-list').jstree({"core":{"themes":{"dots":false}}});
+	}
 	
 	
 	return module;
