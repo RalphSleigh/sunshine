@@ -45,6 +45,7 @@ app.dash = (function(){
 		
 		app.system.addMode('dashboard');
 		app.ts.send({"action":"system.getClientInfo"});//update the client info
+		app.ts.send({"action":"slides.getSlideTree"});//draw slide tree
 	}
 	
 	module.displayClientInfo = function(msg){
@@ -65,7 +66,7 @@ app.dash = (function(){
 	module.displaySlideTree = function(msg) {
 	
 	
-		$('#slides-list').jstree({"core":{"themes":{"dots":false}}});
+		$('#slides-list').jstree({"core":{"themes":{"dots":false},"data":msg.data,"multiple":false}});
 	}
 	
 	
