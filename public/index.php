@@ -8,6 +8,7 @@ header('Content-Type: text/html; charset=utf-8');
 <link href="/css/bootstrap.css" rel="stylesheet">
 <link href="/css/jstree.min.css" rel="stylesheet">
 
+<link href="/css/core.css" rel="stylesheet">
 <link href="/css/display.css" rel="stylesheet">
 <link href="/css/dashboard.css" rel="stylesheet">
 
@@ -23,7 +24,11 @@ header('Content-Type: text/html; charset=utf-8');
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-
-
+<div id="root"></div>
+<div id="status">
+	<div id="connecting">
+		<h3><img src="/css/ajax-loader.gif" /> Connecting</h3>
+	</div>
+</div>
 </body>
 </html>

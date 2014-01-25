@@ -1,11 +1,11 @@
 //this handles client side slide display, yup.
    
 app.slide = (function(){
-	var module = {}, container,margin,content;
+	var module = {}, displays = {};
 
 	module.init = function() {
 		console.log('slide init');
-		container = $('body');//hack for now
+		container = $('#root');//hack for now
 		
 		//make some DIVs
 		margin = $('<div class="margin"></div>');
@@ -18,8 +18,20 @@ app.slide = (function(){
 		
 		}
 
+	module.registerDisplay = function(div,context) {
+		var c = displays[context] = {};
+		c.container = div;
+		c.margin = $('<div class="margin"></div>');
+		c.content = $('<div class="content"></div>');
+		c.container.append(c.margin);
+		c.margin.append(c.content);
+		c.container.addClass('displaywindow');
+	}
+		
 	module.displaySlide = function(msg) {
-		content.html(msg.slideHTML);
+	
+		var c = displays[msg.context];
+		c.content.html(msg.slideHTML);
 	}
 	/*	
 	module.onMessage = function(msg) {

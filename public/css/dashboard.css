@@ -2,11 +2,11 @@
 
 /* dashboard css styles */
 
-body.dashboard {
+#root.dashboard {
 	padding-top:10px;
 }
 
-body.dashboard h3{
+#root.dashboard h3{
 margin: 0.5em 0em;
 }
 
@@ -17,6 +17,11 @@ border-bottom: 1px solid #aaaaaa;
 
 #system-clients .row p{
 margin-top:8px;
+}
+
+#root.dashboard .slideWindow {
+height:300px;
+overflow:hidden;
 }
 
 .icon-blue {

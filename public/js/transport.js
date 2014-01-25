@@ -11,6 +11,8 @@ app.ts = (function(){
 		
 	function wsOpen() {
 		console.log('socket opened');
+		$('#connecting').hide();
+		
 
 		app.system.updateModes();
 		processQueue();
@@ -20,6 +22,7 @@ app.ts = (function(){
 	
 	function wsClose() {
 		console.log('socket closed');
+		$('#connecting').show();
 		whenOpenList = $.Deferred();
 		setTimeout(module.init,2000);
 	
@@ -34,6 +37,7 @@ app.ts = (function(){
 	
 	module.init = function(host, port){
 		console.log('Opening');
+		
 		if(!wsAddress)wsAddress = 'ws://'+host+':'+port;
 		ws = new WebSocket(wsAddress);
 		

@@ -9,6 +9,8 @@ app.system = (function(){
 	
 		app.ts.init(window.location.hostname,12345);
 		app.ts.addMsgCallback(module.onMessage); //generic action handler.
+		$('#connecting').show();
+		
 		
 		if(window.location.pathname.match('slide'))app.ts.addOpenCallback(app.slide.init);
 		else if(window.location.pathname.match('dashboard'))app.dash.init();
@@ -27,8 +29,8 @@ app.system = (function(){
 		}
 		//now call it if it all worked.
 		if(methodToCall) {
-			methodToCall(msg);
 			console.log('Incoming message, action: '+msg.action);
+			methodToCall(msg);		
 		} else {
 			console.log('Incoming message, unknown action: '+msg.action);
 		}

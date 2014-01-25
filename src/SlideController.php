@@ -25,11 +25,26 @@ class SlideController {
 }
 */
 	public function getSlideTree($conn, $msg) {
-		
+	//return an object graph representing the slides folder for display in the slide selection treeview.
+
 		$obj = new \StdClass;
 		$obj->action = "dash.displaySlideTree";
 		$obj->data = $this->getSubTree('exampleslides');
 
+		$conn->send(json_encode($obj));
+	}
+	
+	public function slideSelected($conn, $msg) {
+	//send the slide to the connected dashboard for display in the preview window
+	
+		$file = file_get_contents($msg->slideId);
+		$conn->slideId = $msg->slideId; // store this to display later.
+		
+		$obj = new \StdClass;
+		$obj->action = 'slide.displaySlide';
+		$obj->context = 'preview';
+		$obj->slideHTML = $file;
+	
 		$conn->send(json_encode($obj));
 	}
 	
@@ -63,19 +78,4 @@ class SlideController {
 		
 	}
 	
-	
-	protected function GetSlideList(){
-
-		$slides = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator('exampleslides'),\RecursiveIteratorIterator::SELF_FIRST);
-		$array = iterator_to_array($slides);
-	
-		foreach($array as $index => $file) {
-			if($file->getFilename() == '..' OR $file->getFilename() == '.')unset($array[$index]);
-			}
-			
-		usort($array, function($a,$b){
-			return $a->getPathname() > $b->getPathname();
-			});
-		return($array);
-	}
 }

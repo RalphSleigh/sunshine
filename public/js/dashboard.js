@@ -36,12 +36,15 @@ app.dash = (function(){
 	
 		//this is called once we have the HTML template from the server.
 	
-		$('body').html(msg.templateHTML);
-		$('body').addClass('dashboard');
+		$('#root').html(msg.templateHTML);
+		$('#root').addClass('dashboard');
 		
 		$('#system-server-restart').click(serverRestartButton);
 		$('#system-server-shutdown').click(serverShutdownButton);
 		$('#system-JSON-send').click(JSONSendButton);
+		
+		app.slide.registerDisplay($('#slides-preview-window'),'preview');
+		app.slide.registerDisplay($('#slides-live-window'),'live');
 		
 		app.system.addMode('dashboard');
 		app.ts.send({"action":"system.getClientInfo"});//update the client info
@@ -66,9 +69,13 @@ app.dash = (function(){
 	module.displaySlideTree = function(msg) {
 	
 	
-		$('#slides-list').jstree({"core":{"themes":{"dots":false},"data":msg.data,"multiple":false}});
+		$('#slides-list').on('select_node.jstree',module.selectSlideTree).jstree({"core":{"themes":{"dots":false},"data":msg.data,"multiple":false}});
 	}
 	
+	module.selectSlideTree = function(e, data) {
+		//if its a leaf send it
+		if(data.node.children.length == 0)app.ts.send({"action":"slides.slideSelected","slideId":data.node.id});
+	}
 	
 	return module;
 }());
