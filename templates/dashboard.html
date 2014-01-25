@@ -1,14 +1,14 @@
 <div class="container">
 	<div class="col-md-12">
 		<ul class="nav nav-tabs" id="myTab">
-			<li class="active"><a href="#tab-system" data-toggle="tab">System</a></li>
-			<li><a href="#tab-slides" data-toggle="tab">Slides</a></li>
+			<li class="active"><a href="#tab-slides" data-toggle="tab">Slides</a></li>
+			<li><a href="#tab-system" data-toggle="tab">System</a></li>
 			<li><a href="#tab-other" data-toggle="tab">Other</a></li>
 		</ul>
 	</div> 
 	<div class="col-md-12">
 		<div class="tab-content">
-			<div class="tab-pane active" id="tab-system">
+			<div class="tab-pane" id="tab-system">
 			<!-- System Pane -->
 				<div class="row"><div class="col-md-12"><h3>Clients<small id="system-clients-connected"></small></h3></div></div>
 				<div id="system-clients"></div>
@@ -27,7 +27,7 @@
 				</div>
 			</div>
 		
-			<div class="tab-pane" id="tab-slides">
+			<div class="tab-pane active" id="tab-slides">
 			<!-- Slide selector pane -->
 				<div class="row"><div class="col-md-12"><h3>Clients<small id="system-clients-connected"></small></h3></div></div>
 				<div class="row">
@@ -41,6 +41,11 @@
 							</div>
 							<div class="col-md-6">
 								<div id="slides-live-window" class="slideWindow"></div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 ralphie-padding">
+								<button id="slides-go-live" type="button" class="btn btn-success">Go Live</button>
 							</div>
 						</div>
 					</div>

@@ -16,11 +16,14 @@ app.dash = (function(){
 		if(confirm("Are you sure you wish to restart the server? It won't come back"))app.ts.send({"action":"system.shutdownServer"});
 	}
 	
-	function JSONSendButton(){	
+	function JSONSendButton() {	
 		var data = $('#system-json-send').val();
 		app.ts.send($.parseJSON(data));
 	}
 	
+	function goLiveButton() {
+		app.ts.send({"action":"slides.goLive"});
+	}
 	//function client
 	
 	module.init = function(){
@@ -42,6 +45,7 @@ app.dash = (function(){
 		$('#system-server-restart').click(serverRestartButton);
 		$('#system-server-shutdown').click(serverShutdownButton);
 		$('#system-JSON-send').click(JSONSendButton);
+		$('#slides-go-live').click(goLiveButton);
 		
 		app.slide.registerDisplay($('#slides-preview-window'),'preview');
 		app.slide.registerDisplay($('#slides-live-window'),'live');

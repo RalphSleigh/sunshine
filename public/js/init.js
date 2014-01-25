@@ -12,7 +12,7 @@ app.system = (function(){
 		$('#connecting').show();
 		
 		
-		if(window.location.pathname.match('slide'))app.ts.addOpenCallback(app.slide.init);
+		if(window.location.pathname.match('slide'))app.ts.addOpenCallback(app.slide.registerDisplay($('#root'),'live'));
 		else if(window.location.pathname.match('dashboard'))app.dash.init();
 			
 	}	

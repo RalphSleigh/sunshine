@@ -48,6 +48,18 @@ class SlideController {
 		$conn->send(json_encode($obj));
 	}
 	
+	public function goLive($conn, $msg) {
+	
+		if(!$conn->slideId) return; //Nope!
+		$file = file_get_contents($conn->slideId);
+		
+		$obj = new \StdClass;
+		$obj->action = 'slide.displaySlide';
+		$obj->context = 'live';
+		$obj->slideHTML = $file;
+
+		foreach($conn->ms->clients as $client)$client->send(json_encode($obj));
+	}
 	
 	protected function getSubTree($directory) {
 		

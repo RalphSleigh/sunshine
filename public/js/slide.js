@@ -3,6 +3,7 @@
 app.slide = (function(){
 	var module = {}, displays = {};
 
+	/*
 	module.init = function() {
 		console.log('slide init');
 		container = $('#root');//hack for now
@@ -17,7 +18,8 @@ app.slide = (function(){
 		app.system.addMode('slides');
 		
 		}
-
+	*/
+	
 	module.registerDisplay = function(div,context) {
 		var c = displays[context] = {};
 		c.container = div;

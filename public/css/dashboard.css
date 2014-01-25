@@ -24,6 +24,10 @@ height:300px;
 overflow:hidden;
 }
 
+#root.dashboard .ralphie-padding{
+padding-top:10px;
+}
+
 .icon-blue {
 color:#aaaaff;
 }

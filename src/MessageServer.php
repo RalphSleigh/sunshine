@@ -51,6 +51,7 @@ class MessageServer implements MessageComponentInterface{
 		$this->log->notice('New Connection: '.$conn->remoteAddress.' '.$conn->resourceId);
 		$this->clients[$conn->resourceId] = $conn;
 		$conn->modes = array();
+		$conn->ms = $this;//HACK;
 		
 		//foreach($this->clients as $client) {
 		//	if(in_array('dashboard',$client->modes))$this->getClientInfo($client, null);

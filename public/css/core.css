@@ -1,4 +1,6 @@
-
+#root.displaywindow {
+height:100vh;
+}
 
 #status {
 position:fixed;
