@@ -20,6 +20,34 @@ app.slide = (function(){
 		}
 	*/
 	
+	function resizeContent(index,c) {
+	
+		//reset
+		var scale = 0.4;
+		c.container.css('font-size',scale+'em');
+	
+		var currentHeight = c.content.height();
+		var targetHeight = c.margin.height();
+		var i = 0;
+		var pH;
+		while(currentHeight < targetHeight && i < 100) {
+			var ratio = targetHeight/currentHeight;
+			pH = scale;
+			scale = scale * ((ratio - 1) * 0.2 + 1);
+			c.container.css('font-size',scale+'em');
+			currentHeight = c.content.height();
+			i++;
+		}
+		c.container.css('font-size',pH+'em');
+	}
+	
+	module.resizeDisplays = function() {
+	
+		$.each(displays, resizeContent);
+	
+	}
+	
+	
 	module.registerDisplay = function(div,context) {
 		var c = displays[context] = {};
 		c.container = div;
@@ -34,6 +62,7 @@ app.slide = (function(){
 	
 		var c = displays[msg.context];
 		c.content.html(msg.slideHTML);
+		resizeContent(0,c);
 	}
 	/*	
 	module.onMessage = function(msg) {

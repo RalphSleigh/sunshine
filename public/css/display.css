@@ -4,10 +4,14 @@ padding:0px;
 font-family:sans-serif;
 }
 
+#root.displaywindow {
+height:100vh;
+}
+
 .displaywindow .margin {
 padding:10px;
 background:#004400;
-height:100vh;
+height:100%;
 }
 
 .displaywindow {
@@ -16,15 +20,25 @@ overflow:hidden
 
 .displaywindow .content{
 
-
+padding:1px;
 font-size:1em;
 color:#ffffff;
 }
 
-.displaywindow .content h1,.displaywindow .content h2{
-
+.displaywindow .content h1{
 font-size:120%;
+}
 
+.displaywindow .content h2{
+font-size:115%;
+}
+
+.displaywindow .content h3{
+font-size:110%;
+}
+
+.displaywindow .content h4{
+font-size:105%;
 }
 
 .displaywindow .content p {
@@ -35,13 +49,16 @@ color:#ffffff;
 //-webkit-text-stroke-width: 1px;
 }
 
-.displaywindow .content ul {
+.displaywindow .content ul ,.displaywindow .content ol{
 margin:1em;
 margin-left:2em;
 }
 
+
+
 .displaywindow .content h1,.displaywindow .content h2, .content h3,.displaywindow .content h4 {
-margin-left:0.5em;
+margin:0.5em 1em;
+
 }
 
 

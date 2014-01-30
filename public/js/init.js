@@ -5,12 +5,24 @@ var app = {};
 app.system = (function(){
 	var module = {},modes = [];
 	
+	function debouncer(func, timeout) {
+		var timeoutID , timeout = timeout || 500;
+		return function () {
+			var scope = this , args = arguments;
+			clearTimeout( timeoutID );
+			timeoutID = setTimeout( function () {
+          func.apply( scope , Array.prototype.slice.call( args ) );
+      } , timeout );
+   }
+}
+	
+	
 	module.init = function(){
 	
 		app.ts.init(window.location.hostname,12345);
 		app.ts.addMsgCallback(module.onMessage); //generic action handler.
 		$('#connecting').show();
-		
+		$(window).resize(debouncer(app.slide.resizeDisplays));
 		
 		if(window.location.pathname.match('slide'))app.ts.addOpenCallback(app.slide.registerDisplay($('#root'),'live'));
 		else if(window.location.pathname.match('dashboard'))app.dash.init();
