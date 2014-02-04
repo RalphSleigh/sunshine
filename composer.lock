@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "665e0281ecb042f14833e3ed36a90c46",
+    "hash": "6e90df0b312c9f8f32845222a42540dd",
     "packages": [
         {
             "name": "cboden/ratchet",
@@ -53,6 +53,44 @@
                 "sockets"
             ],
             "time": "2013-10-14 14:38:12"
+        },
+        {
+            "name": "dg/twitter-php",
+            "version": "dev-stream_context",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dg/twitter-php.git",
+                "reference": "48b66c99be57ce332bd874b9800df7fd8f807fc7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dg/twitter-php/zipball/48b66c99be57ce332bd874b9800df7fd8f807fc7",
+                "reference": "48b66c99be57ce332bd874b9800df7fd8f807fc7",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "http://davidgrudl.com"
+                }
+            ],
+            "description": "Small and easy Twitter wrapper for PHP.",
+            "homepage": "https://github.com/dg/twitter-php",
+            "keywords": [
+                "oauth",
+                "twitter"
+            ],
+            "time": "2014-01-17 17:00:49"
         },
         {
             "name": "evenement/evenement",
@@ -403,12 +441,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rdlowrey/Auryn.git",
-                "reference": "865fb7146a8aed5bb8175da5c916145176666a76"
+                "reference": "c2232a78dfb189a1bcc419ebf31aadf6407c25ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rdlowrey/Auryn/zipball/865fb7146a8aed5bb8175da5c916145176666a76",
-                "reference": "865fb7146a8aed5bb8175da5c916145176666a76",
+                "url": "https://api.github.com/repos/rdlowrey/Auryn/zipball/c2232a78dfb189a1bcc419ebf31aadf6407c25ea",
+                "reference": "c2232a78dfb189a1bcc419ebf31aadf6407c25ea",
                 "shasum": ""
             },
             "require": {
@@ -434,7 +472,7 @@
                 {
                     "name": "Daniel Lowrey",
                     "email": "rdlowrey@gmail.com",
-                    "role": "Creator / Main Developer"
+                    "role": "Creator / Lead Developer"
                 },
                 {
                     "name": "Dan Ackroyd",
@@ -450,7 +488,7 @@
                 "dic",
                 "ioc"
             ],
-            "time": "2014-01-05 10:01:25"
+            "time": "2014-01-26 19:06:25"
         },
         {
             "name": "react/event-loop",
@@ -762,7 +800,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "monolog/monolog": 20,
-        "rdlowrey/auryn": 20
+        "rdlowrey/auryn": 20,
+        "dg/twitter-php": 20
     },
     "platform": [
 

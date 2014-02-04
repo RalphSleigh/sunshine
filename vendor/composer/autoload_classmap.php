@@ -7,4 +7,17 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
+    'Twitter' => $vendorDir . '/dg/twitter-php/src/twitter.class.php',
+    'TwitterException' => $vendorDir . '/dg/twitter-php/src/twitter.class.php',
+    'Twitter_OAuthConsumer' => $vendorDir . '/dg/twitter-php/src/OAuth.php',
+    'Twitter_OAuthDataStore' => $vendorDir . '/dg/twitter-php/src/OAuth.php',
+    'Twitter_OAuthException' => $vendorDir . '/dg/twitter-php/src/OAuth.php',
+    'Twitter_OAuthRequest' => $vendorDir . '/dg/twitter-php/src/OAuth.php',
+    'Twitter_OAuthServer' => $vendorDir . '/dg/twitter-php/src/OAuth.php',
+    'Twitter_OAuthSignatureMethod' => $vendorDir . '/dg/twitter-php/src/OAuth.php',
+    'Twitter_OAuthSignatureMethod_HMAC_SHA1' => $vendorDir . '/dg/twitter-php/src/OAuth.php',
+    'Twitter_OAuthSignatureMethod_PLAINTEXT' => $vendorDir . '/dg/twitter-php/src/OAuth.php',
+    'Twitter_OAuthSignatureMethod_RSA_SHA1' => $vendorDir . '/dg/twitter-php/src/OAuth.php',
+    'Twitter_OAuthToken' => $vendorDir . '/dg/twitter-php/src/OAuth.php',
+    'Twitter_OAuthUtil' => $vendorDir . '/dg/twitter-php/src/OAuth.php',
 );

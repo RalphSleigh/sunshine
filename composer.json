@@ -3,7 +3,8 @@
 	"require": {
 				"monolog/monolog": "1.7.*@dev",
 				"cboden/Ratchet": "0.3.*",
-				"rdlowrey/auryn": "dev-master"
+				"rdlowrey/auryn": "dev-master",
+				"dg/twitter-php": "dev-stream_context"
 				},
 	"autoload": {
         "psr-4": {"Ralphie\\Sunshine\\": "src/"}}

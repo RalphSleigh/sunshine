@@ -10,12 +10,14 @@ class ActionRouter {
 	public function __construct(
 	\Monolog\Logger $logger,
 	\Ralphie\Sunshine\SlideController $s,
-	\Ralphie\Sunshine\MessageController $m){
+	\Ralphie\Sunshine\MessageController $m,
+	\Ralphie\Sunshine\TwitterController $t){
 	
 	
 		$this->log = $logger;
 		$this->modules['slides'] = $s;
 		$this->modules['messages'] = $m;
+		$this->modules['twitter'] = $t;
 	
 		$this->log->debug('ActionRouter Constructed');	
 	}
