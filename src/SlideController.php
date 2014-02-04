@@ -48,6 +48,19 @@ class SlideController {
 		$conn->send(json_encode($obj));
 	}
 	
+	public function goLogo($conn, $msg) {
+	
+		if($file = file_get_contents('exampleslides/logo.html')) { //hard code = BAD
+		
+			$obj = new \StdClass;
+			$obj->action = 'slide.displaySlide';
+			$obj->context = 'live';
+			$obj->slideHTML = $file;
+			
+			foreach($conn->ms->clients as $client)$client->send(json_encode($obj));
+		}
+	}
+	
 	public function goLive($conn, $msg) {
 	
 		if(!$conn->slideId) return; //Nope!

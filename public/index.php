@@ -6,6 +6,7 @@ header('Content-Type: text/html; charset=utf-8');
 <head>
 
 <link href="/css/bootstrap.css" rel="stylesheet">
+<link href="/css/jquery-ui.min.css" rel="stylesheet">
 <link href="/css/jstree.min.css" rel="stylesheet">
 
 <link href="/css/core.css" rel="stylesheet">
@@ -13,12 +14,14 @@ header('Content-Type: text/html; charset=utf-8');
 <link href="/css/dashboard.css" rel="stylesheet">
 
 <script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/js/jstree.min.js"></script>
 <script src="/js/bootstrap.js"></script>
 
 <script type="text/javascript" src="/js/init.js"></script>
 <script type="text/javascript" src="/js/transport.js"></script>
 <script type="text/javascript" src="/js/slide.js"></script>
+<script type="text/javascript" src="/js/messages.js"></script>
 <script type="text/javascript" src="/js/dashboard.js"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">

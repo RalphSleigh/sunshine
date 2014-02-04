@@ -21,15 +21,17 @@ app.slide = (function(){
 	*/
 	
 	function resizeContent(index,c) {
-	
+		$('.displaywindow img').load(module.resizeDisplays)//HACK to fix image loading
 		//reset
 		var scale = 0.4;
 		c.container.css('font-size',scale+'em');
-	
+		c.content.css('padding-top','1px');
+		//scale as large as possible
 		var currentHeight = c.content.height();
 		var targetHeight = c.margin.height();
 		var i = 0;
 		var pH;
+	
 		while(currentHeight < targetHeight && i < 100) {
 			var ratio = targetHeight/currentHeight;
 			pH = scale;
@@ -39,6 +41,12 @@ app.slide = (function(){
 			i++;
 		}
 		c.container.css('font-size',pH+'em');
+		//now lets centre align (this is mostly for images)
+		currentHeight = c.content.height();
+		if(currentHeight > 0) {
+			var paddingTop = (targetHeight - currentHeight)/2;
+			c.content.css('padding-top',paddingTop+'px');
+		}
 	}
 	
 	module.resizeDisplays = function() {
@@ -56,13 +64,17 @@ app.slide = (function(){
 		c.container.append(c.margin);
 		c.margin.append(c.content);
 		c.container.addClass('displaywindow');
+		
+		app.messages.registerDisplay(div,context);//add the message bits;
 	}
 		
 	module.displaySlide = function(msg) {
 	
 		var c = displays[msg.context];
 		c.content.html(msg.slideHTML);
-		resizeContent(0,c);
+		module.resizeDisplays();
+		
+		//resizeContent(0,c);
 	}
 	/*	
 	module.onMessage = function(msg) {

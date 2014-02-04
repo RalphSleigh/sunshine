@@ -22,7 +22,7 @@ app.system = (function(){
 		app.ts.init(window.location.hostname,12345);
 		app.ts.addMsgCallback(module.onMessage); //generic action handler.
 		$('#connecting').show();
-		$(window).resize(debouncer(app.slide.resizeDisplays));
+		$(window).resize(debouncer(app.slide.resizeDisplays,100));
 		
 		if(window.location.pathname.match('slide'))app.ts.addOpenCallback(app.slide.registerDisplay($('#root'),'live'));
 		else if(window.location.pathname.match('dashboard'))app.dash.init();

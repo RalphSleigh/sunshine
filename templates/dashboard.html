@@ -3,7 +3,7 @@
 		<ul class="nav nav-tabs" id="myTab">
 			<li class="active"><a href="#tab-slides" data-toggle="tab">Slides</a></li>
 			<li><a href="#tab-system" data-toggle="tab">System</a></li>
-			<li><a href="#tab-other" data-toggle="tab">Other</a></li>
+			<li><a href="#tab-twitter" data-toggle="tab">Twitter</a></li>
 		</ul>
 	</div> 
 	<div class="col-md-12">
@@ -45,7 +45,19 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12 ralphie-padding">
-								<button id="slides-go-live" type="button" class="btn btn-success">Go Live</button>
+								<form class="form-inline" role="form">
+									<fieldset class="form-group">
+										<button id="slides-go-live" type="button" class="btn btn-success">Go Live</button>
+										<button id="slides-logo" type="button" class="btn btn-primary">Logo</button>
+										<button id="slides-message" type="button" class="btn btn-primary">Message</button>
+									
+										<label for="slides-message-duration">Duration</label>
+										<input type="number" class="form-control" id="slides-message-duration" value="10">
+									</fieldset>
+								</form>
+							</div>
+							<div class="col-md-12 ralphie-padding">
+							<textarea class="form-control" id="slides-message-box" rows="3"></textarea>
 							</div>
 						</div>
 					</div>

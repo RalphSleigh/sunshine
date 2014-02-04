@@ -24,6 +24,16 @@ app.dash = (function(){
 	function goLiveButton() {
 		app.ts.send({"action":"slides.goLive"});
 	}
+	
+	function displayLogoButton() {
+		app.ts.send({"action":"slides.goLogo"});
+	}
+	
+	function displayMessageButton() {
+		var data = $('#slides-message-box').val();
+		var duration = $('#slides-message-duration').val();
+		app.ts.send({"action":"messages.displayMessage","message":data,"duration":duration});
+	}
 	//function client
 	
 	module.init = function(){
@@ -46,6 +56,8 @@ app.dash = (function(){
 		$('#system-server-shutdown').click(serverShutdownButton);
 		$('#system-JSON-send').click(JSONSendButton);
 		$('#slides-go-live').click(goLiveButton);
+		$('#slides-logo').click(displayLogoButton);
+		$('#slides-message').click(displayMessageButton);
 		
 		app.slide.registerDisplay($('#slides-preview-window'),'preview');
 		app.slide.registerDisplay($('#slides-live-window'),'live');

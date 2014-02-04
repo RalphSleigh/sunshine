@@ -36,3 +36,6 @@ color:#aaaaff;
 color:#b22400;
 }
 
+input[type="number"].form-control {
+width:58px;
+}
