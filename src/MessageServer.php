@@ -39,7 +39,7 @@ class MessageServer implements MessageComponentInterface{
 		*/
 				
 		$this->log->debug('MessageServer Constructed');
-		$this->log->Info('Looping!');
+		
 	}
 	/*
 	public function registerAction($action, callable $method) {
@@ -52,7 +52,7 @@ class MessageServer implements MessageComponentInterface{
 		$this->clients[$conn->resourceId] = $conn;
 		$conn->modes = array();
 		$conn->ms = $this;//HACK;
-		
+		$conn->lastSeen = time();
 		//foreach($this->clients as $client) {
 		//	if(in_array('dashboard',$client->modes))$this->getClientInfo($client, null);
 		//	}
@@ -61,6 +61,7 @@ class MessageServer implements MessageComponentInterface{
 	public function onClose(ConnectionInterface $conn) {
 		$this->log->notice('Disconnected: '.$conn->remoteAddress.' '.$conn->resourceId);
 		unset($this->clients[$conn->resourceId]);
+		$this->updateDashClientLists();
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {
@@ -68,13 +69,16 @@ class MessageServer implements MessageComponentInterface{
     }
 	
 	public function onMessage(ConnectionInterface $conn, $msg){ //called on every message
-			
+		
+		//update lastseen time on client
+		
+		$conn->lastSeen = time();
 		//message should be json object, 2 properties. msgfor->handler and data is passed through.
 		
 		$message = json_decode($msg);		
 		//$returnmsgs = null;
 		
-		$this->log->info('Incoming Message: '.substr($msg,0,40));
+		//$this->log->info('Incoming Message: '.substr($msg,0,40));
 			
 		//New server code:
 		
@@ -161,9 +165,7 @@ class MessageServer implements MessageComponentInterface{
 		foreach($message->modes as $mode)$modes[] = $mode;
 		$conn->modes = $modes;
 		
-		foreach($this->clients as $client) {
-			if(in_array('dashboard',$client->modes))$this->getClientInfo($client, null);
-			}
+		$this->updateDashClientLists();
 		
 		}
 	
@@ -180,6 +182,12 @@ class MessageServer implements MessageComponentInterface{
 		$return->action = "dash.displayClientInfo";
 		$conn->send(json_encode($return));
 	}
+	
+	public function updateDashClientLists() {
+		foreach($this->clients as $client) {
+			if(in_array('dashboard',$client->modes))$this->getClientInfo($client, null);
+			}
+		}
 	
 	public function refreshClient($conn, $message) {
 		if($this->clients[$message->clientId]) {
@@ -199,4 +207,7 @@ class MessageServer implements MessageComponentInterface{
 		$this->log->warning('SERVER SHUTTING DOWN');
 		exit(0);
 	}
+	
+	public function pong($conn, $message) {}
+	
 }

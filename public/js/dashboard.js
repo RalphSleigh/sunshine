@@ -65,6 +65,7 @@ app.dash = (function(){
 		app.system.addMode('dashboard');
 		app.ts.send({"action":"system.getClientInfo"});//update the client info
 		app.ts.send({"action":"slides.getSlideTree"});//draw slide tree
+		app.ts.send({"action":"twitter.getTweets"});//draw tweet list
 	}
 	
 	module.displayClientInfo = function(msg){
@@ -93,5 +94,16 @@ app.dash = (function(){
 		if(data.node.children.length == 0)app.ts.send({"action":"slides.slideSelected","slideId":data.node.id});
 	}
 	
+	module.displayTweetList = function(msg) {
+		$.each(msg.tweets, function( key, tweet ) { //this is ugly, but w/ever
+			var line = '<div class="row">';
+			line+='<div class="col-md-2"><p class="username"><b>{0}</b><br />{1}</p></div>'.format(tweet.user.screen_name, tweet.shortDate);
+			line+='<div class="col-md-8"><p>{0}</p></div>'.format(tweet.HTML);
+			line+='<div class="col-md-2"><button type="button" data-tweetid="{0}" class="btn btn-default tweetDisplayButton">Display</button></div></div>'.format(tweet.id);
+			$('#twitter-list').append(line);
+			});
+	
+	
+	}
 	return module;
 }());

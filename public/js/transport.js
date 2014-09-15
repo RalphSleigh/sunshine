@@ -3,9 +3,10 @@
  
 app.ts = (function(){
  
-	var module = {}, ws, wsAddress, recList = $.Callbacks(), sendQueue = [], whenOpenList = $.Deferred();
+	var module = {}, ws, wsAddress, recList = $.Callbacks(), sendQueue = [], whenOpenList = $.Deferred(), lastSeen, connCheckTask;
 	
 	function wsMessage(msg) {
+		lastSeen = Date.now(); //update the lastSeen time
 		recList.fire($.parseJSON(msg.data));
 		}
 		
@@ -13,7 +14,10 @@ app.ts = (function(){
 		console.log('socket opened');
 		$('#connecting').hide();
 		
-
+		lastSeen = Date.now();
+		connCheckTask = setInterval(checkLastSeen, 5000);
+		
+		
 		app.system.updateModes();
 		processQueue();
 		
@@ -22,6 +26,7 @@ app.ts = (function(){
 	
 	function wsClose() {
 		console.log('socket closed');
+		clearInterval(connCheckTask);
 		$('#connecting').show();
 		whenOpenList = $.Deferred();
 		setTimeout(module.init,2000);
@@ -31,8 +36,18 @@ app.ts = (function(){
 	function processQueue() {
 		var item;
 		while(item = sendQueue.pop()) {
-			module.send(item);
+			//dont send modes gets done in wsOpen
+			if(item.action != 'system.registerModes')module.send(item);
 		}
+	}
+	
+	function checkLastSeen() {
+		//check last seen, if  its too long ago close the connection
+		if(Date.now() - lastSeen > 20000) {
+			console.log('not seen server, closing');
+			ws.close();
+			wsClose();  //force renew the handle.
+			}
 	}
 	
 	module.init = function(host, port){

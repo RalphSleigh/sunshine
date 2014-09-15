@@ -10,7 +10,7 @@
 margin: 0.5em 0em;
 }
 
-#system-clients .row {
+#system-clients .row, #twitter-list .row {
 padding:5px 0px;
 border-bottom: 1px solid #aaaaaa;
 }

@@ -9,9 +9,6 @@ return array(
     'Symfony\\Component\\Routing\\' => array($vendorDir . '/symfony/routing'),
     'Symfony\\Component\\HttpFoundation\\' => array($vendorDir . '/symfony/http-foundation'),
     'Symfony\\Component\\EventDispatcher\\' => array($vendorDir . '/symfony/event-dispatcher'),
-    'React\\Stream' => array($vendorDir . '/react/stream'),
-    'React\\Socket' => array($vendorDir . '/react/socket'),
-    'React\\EventLoop' => array($vendorDir . '/react/event-loop'),
     'Ratchet' => array($vendorDir . '/cboden/ratchet/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'Monolog' => array($vendorDir . '/monolog/monolog/src'),
@@ -20,5 +17,4 @@ return array(
     'Guzzle\\Http' => array($vendorDir . '/guzzle/http'),
     'Guzzle\\Common' => array($vendorDir . '/guzzle/common'),
     'Evenement' => array($vendorDir . '/evenement/evenement/src'),
-    'Auryn' => array($vendorDir . '/rdlowrey/auryn/lib'),
 );

@@ -1,0 +1,18 @@
+<?php
+/*
+Configuration options here..
+*/
+
+define("WEBSOCKET_HOST",0);
+define("WEBSOCKET_PORT","12345");
+
+define("SLIDE_DIRECTORY", "exampleslides");
+
+#Twitter API key
+
+define("TWITTER_CONSUMER_KEY","");
+define("TWITTER_CONSUMER_SECRET","");
+define("TWITTER_ACCESS_TOKEN","");
+define("TWITTER_ACCESS_TOKEN_SECRET","");
+
+?>

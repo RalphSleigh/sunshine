@@ -6,5 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'React\\Stream\\' => array($vendorDir . '/react/stream'),
+    'React\\Socket\\' => array($vendorDir . '/react/socket/src'),
+    'React\\EventLoop\\' => array($vendorDir . '/react/event-loop'),
     'Ralphie\\Sunshine\\' => array($baseDir . '/src'),
+    'Auryn\\' => array($vendorDir . '/rdlowrey/auryn/lib'),
 );

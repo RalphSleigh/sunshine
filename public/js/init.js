@@ -24,7 +24,12 @@ app.system = (function(){
 		$('#connecting').show();
 		$(window).resize(debouncer(app.slide.resizeDisplays,100));
 		
-		if(window.location.pathname.match('slide'))app.ts.addOpenCallback(app.slide.registerDisplay($('#root'),'live'));
+		if(window.location.pathname.match('slide')) {
+		
+			app.ts.addOpenCallback(app.slide.registerDisplay($('#root'),'live'));
+			app.ts.addOpenCallback(app.system.addMode('slide'));
+			
+		}
 		else if(window.location.pathname.match('dashboard'))app.dash.init();
 			
 	}	
@@ -59,6 +64,10 @@ app.system = (function(){
 	
 	module.refresh = function() {
 		location.reload(true);
+	}
+	
+	module.ping = function() {
+		app.ts.send({"action":"system.pong"});
 	}
 	
 	module.prettyJSON = function(json) {

@@ -4,10 +4,9 @@
 				"monolog/monolog": "1.7.*@dev",
 				"cboden/Ratchet": "0.3.*",
 				"rdlowrey/auryn": "dev-master",
-				"dg/twitter-php": "dev-stream_context"
+				"dg/twitter-php": "dev-stream_context",
+				"raveren/kint": "dev-1.0.0-wip"
 				},
 	"autoload": {
         "psr-4": {"Ralphie\\Sunshine\\": "src/"}}
     }
-
-}
