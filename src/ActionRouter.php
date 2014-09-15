@@ -11,13 +11,15 @@ class ActionRouter {
 	\Monolog\Logger $logger,
 	\Ralphie\Sunshine\SlideController $s,
 	\Ralphie\Sunshine\MessageController $m,
-	\Ralphie\Sunshine\TwitterController $t){
+	\Ralphie\Sunshine\TwitterController $t,
+	\Ralphie\Sunshine\ChatController $c){
 	
 	
 		$this->log = $logger;
 		$this->modules['slides'] = $s;
 		$this->modules['messages'] = $m;
 		$this->modules['twitter'] = $t;
+		$this->modules['chat'] = $c;
 	
 		$this->log->debug('ActionRouter Constructed');	
 	}

@@ -39,3 +39,8 @@ color:#b22400;
 input[type="number"].form-control {
 width:58px;
 }
+
+#chat-box {
+max-height:100px;
+overflow-y:scroll;
+}

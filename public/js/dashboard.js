@@ -61,6 +61,7 @@ app.dash = (function(){
 		
 		app.slide.registerDisplay($('#slides-preview-window'),'preview');
 		app.slide.registerDisplay($('#slides-live-window'),'live');
+		app.chat.init();
 		
 		app.system.addMode('dashboard');
 		app.ts.send({"action":"system.getClientInfo"});//update the client info

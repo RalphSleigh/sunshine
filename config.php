@@ -10,6 +10,8 @@ define("SUNSHINE_PING_DISCONNECT",30);
 
 define("SLIDE_DIRECTORY", "exampleslides");
 
+define("SUNSHINE_CHAT_FILE","chat.txt");
+
 #Twitter API key
 
 define("TWITTER_CONSUMER_KEY","iR6qU5CbU1xm9FJ2AKwuQ");

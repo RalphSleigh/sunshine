@@ -22,6 +22,7 @@ header('Content-Type: text/html; charset=utf-8');
 <script type="text/javascript" src="/js/transport.js"></script>
 <script type="text/javascript" src="/js/slide.js"></script>
 <script type="text/javascript" src="/js/messages.js"></script>
+<script type="text/javascript" src="/js/chat.js"></script>
 <script type="text/javascript" src="/js/dashboard.js"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
