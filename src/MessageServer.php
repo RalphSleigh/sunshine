@@ -150,6 +150,7 @@ class MessageServer implements MessageComponentInterface{
 					# Is actually a file we can send
 					$obj->templateHTML = file_get_contents($file->getPathname());
 					$obj->action = $message->call;
+					$obj->template = $message->template;
 					$conn->send(json_encode($obj));
 					} else {
 					$this->log->error('Template not found '.$file->getPathname());

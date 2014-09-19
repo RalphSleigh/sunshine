@@ -1,55 +1,17 @@
-html,body,p,h1,h2,h3,ul,li {
-margin:0px;
-padding:0px;
-font-family:sans-serif;
+#root.chat .slideWindow {
+height:300px;
+overflow:hidden;
 }
 
-.layouttable {
-width:100%;
+#root.chat .ralphie-padding{
+padding-top:10px;
 }
 
-.layouttable td {
-vertical-align:top;
-padding:5px;
+#root.chat {
+	padding-top:10px;
 }
 
-.windowcell, .chatcell {
-width:50%;
-}
-
-#livewindow,#previewwindow {
-//width:100%;
-height:100%;
-border:1px solid #000;
-background:#ffffff;
-}
-
-#chatcontainer{
-}
-
-#chatcontent{
-padding:5px;
-border: 1px #888888 solid;
-margin-bottom:8px;
-overflow:scroll;
-overflow-x:hidden;
-}
-
-#chatinputcontainer{
-margin-right:65px;
-height:60px;
-}
-
-#chatinput {
-width:100%;
-height:54px;
-padding:0px;
-resize: none;
-}
-
-#chatsendbutton {
-width:50px;
-float:right;
-height:55px;
-margin-right:5px;
+#root.chat  #chat-box {
+max-height:250px;
+overflow-y:scroll;
 }

@@ -25,11 +25,16 @@ app.chat = (function(){
 
 	
 	module.init = function(){
+	
+		//do we listen to chat? 
+		if(!$('#chat-box').length)return;
 		//set up chat
 		var request = {};
 		request.action = "chat.getExistingChat";
 		app.ts.send(request);
-		user = prompt('Usernamer:');
+		
+		user = $.cookie('username') || prompt('Username:');
+		$.cookie('username', user, { expires: 7 });
 	}
 	
 	module.insertChatText = function(msg) {

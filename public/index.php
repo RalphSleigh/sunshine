@@ -12,10 +12,12 @@ header('Content-Type: text/html; charset=utf-8');
 <link href="/css/core.css" rel="stylesheet">
 <link href="/css/display.css" rel="stylesheet">
 <link href="/css/dashboard.css" rel="stylesheet">
+<link href="/css/chat.css" rel="stylesheet">
 
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/js/jstree.min.js"></script>
+<script type="text/javascript" src="/js/cookie.js"></script>
 <script src="/js/bootstrap.js"></script>
 
 <script type="text/javascript" src="/js/init.js"></script>

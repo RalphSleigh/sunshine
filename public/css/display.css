@@ -4,7 +4,7 @@ padding:0px;
 font-family:sans-serif;
 }
 
-#root.displaywindow {
+#root.slide, #root.slide div.displaywindow {
 height:100vh;
 width:100vw;
 overflow:hidden;

@@ -20,6 +20,15 @@ app.slide = (function(){
 		}
 	*/
 	
+	module.init = function() {
+		//find our slide windows and register them
+		$('.slideWindow').each(function(){
+				var node = $(this);
+				app.slide.registerDisplay(node, node.data('slide-name'));
+		});
+	
+	}
+	
 	function resizeContent(index,c) {
 		$('.displaywindow img').load(module.resizeDisplays)//HACK to fix image loading
 		//reset

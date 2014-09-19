@@ -24,6 +24,8 @@ app.messages = (function(){
 
 	}
 	
+	module.init = function(){};
+	
 
 return module;	
 }());

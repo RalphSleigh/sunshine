@@ -24,6 +24,15 @@ app.system = (function(){
 		$('#connecting').show();
 		$(window).resize(debouncer(app.slide.resizeDisplays,100));
 		
+		
+		
+		var request = {};
+		request.action = "system.getHTMLTemplate";
+		request.template = window.location.pathname.replace(/\//g,"");
+		request.call = "system.installTemplate";
+		app.ts.send(request);
+		
+		/*
 		if(window.location.pathname.match('slide')) {
 		
 			app.ts.addOpenCallback(app.slide.registerDisplay($('#root'),'live'));
@@ -31,8 +40,18 @@ app.system = (function(){
 			
 		}
 		else if(window.location.pathname.match('dashboard'))app.dash.init();
+		*/
 			
-	}	
+	}
+	
+	module.installTemplate = function(msg) {
+		$('#root').html(msg.templateHTML);//add the HTML
+		$('#root').addClass(msg.template);//include a class on root Element
+		app.dash.init(); //call init handlers
+		app.chat.init();
+		app.slide.init();
+		app.messages.init();
+	}
 	
 	module.onMessage = function(msg) {
 		//lets get gnarly and extract the function out of the window object by MAGIC.

@@ -36,21 +36,11 @@ app.dash = (function(){
 	}
 	//function client
 	
-	module.init = function(){
-		//oh lordie
-		var request = {};
-		request.action = "system.getHTMLTemplate";
-		request.template = "dashboard";
-		request.call = "dash.installHTML";
-		app.ts.send(request);
-	}
-	
-	module.installHTML = function(msg){
+	module.init = function(msg){
 	
 		//this is called once we have the HTML template from the server.
-	
-		$('#root').html(msg.templateHTML);
-		$('#root').addClass('dashboard');
+		
+		if(!$('.dashboard').length)return;//run this if we are a dashboard
 		
 		$('#system-server-restart').click(serverRestartButton);
 		$('#system-server-shutdown').click(serverShutdownButton);
@@ -59,9 +49,8 @@ app.dash = (function(){
 		$('#slides-logo').click(displayLogoButton);
 		$('#slides-message').click(displayMessageButton);
 		
-		app.slide.registerDisplay($('#slides-preview-window'),'preview');
-		app.slide.registerDisplay($('#slides-live-window'),'live');
-		app.chat.init();
+		//app.slide.registerDisplay($('#slides-preview-window'),'preview');
+		//app.slide.registerDisplay($('#slides-live-window'),'live');
 		
 		app.system.addMode('dashboard');
 		app.ts.send({"action":"system.getClientInfo"});//update the client info
