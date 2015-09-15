@@ -6,7 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
+    'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Resources/stubs/SessionHandlerInterface.php',
     'Twitter' => $vendorDir . '/dg/twitter-php/src/twitter.class.php',
     'TwitterException' => $vendorDir . '/dg/twitter-php/src/twitter.class.php',
     'Twitter_OAuthConsumer' => $vendorDir . '/dg/twitter-php/src/OAuth.php',

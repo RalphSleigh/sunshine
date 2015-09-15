@@ -44,7 +44,7 @@ class SlideController {
 		$obj->action = 'slide.displaySlide';
 		$obj->context = 'preview';
 		$obj->slideHTML = $file;
-	
+
 		$conn->send(json_encode($obj));
 	}
 	

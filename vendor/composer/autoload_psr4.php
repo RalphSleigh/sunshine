@@ -6,9 +6,13 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'React\\Stream\\' => array($vendorDir . '/react/stream'),
+    'Symfony\\Component\\Routing\\' => array($vendorDir . '/symfony/routing'),
+    'Symfony\\Component\\HttpFoundation\\' => array($vendorDir . '/symfony/http-foundation'),
+    'Symfony\\Component\\EventDispatcher\\' => array($vendorDir . '/symfony/event-dispatcher'),
+    'React\\Stream\\' => array($vendorDir . '/react/stream/src'),
     'React\\Socket\\' => array($vendorDir . '/react/socket/src'),
     'React\\EventLoop\\' => array($vendorDir . '/react/event-loop'),
+    'Ratchet\\' => array($vendorDir . '/cboden/ratchet/src/Ratchet'),
     'Ralphie\\Sunshine\\' => array($baseDir . '/src'),
     'Auryn\\' => array($vendorDir . '/rdlowrey/auryn/lib'),
 );

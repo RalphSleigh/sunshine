@@ -66,7 +66,13 @@ app.system = (function(){
 		//now call it if it all worked.
 		if(methodToCall) {
 			console.log('Incoming message, action: '+msg.action);
-			methodToCall(msg);		
+
+			try {
+				methodToCall(msg);
+			} catch (err) {
+				console.log(err);
+			}	
+
 		} else {
 			console.log('Incoming message, unknown action: '+msg.action);
 		}

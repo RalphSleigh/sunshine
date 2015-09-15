@@ -1,0 +1,453 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"json",
+				"json_decode"
+			],
+			[
+				"D",
+				"dbquery"
+			],
+			[
+				"comp",
+				"componentDidMount"
+			],
+			[
+				"conm",
+				"componentWillUnmount"
+			],
+			[
+				"save",
+				"saveResult"
+			],
+			[
+				"jon",
+				"json_decode"
+			],
+			[
+				"sess",
+				"sessionData"
+			],
+			[
+				"Questions",
+				"Questions"
+			],
+			[
+				"par",
+				"parsed"
+			],
+			[
+				"get",
+				"getSessions"
+			],
+			[
+				"Sess",
+				"SessionRow"
+			],
+			[
+				"sessions",
+				"sessions"
+			],
+			[
+				"fi",
+				"function"
+			],
+			[
+				"addS",
+				"addSession"
+			],
+			[
+				"getM",
+				"getMembers"
+			],
+			[
+				"mem",
+				"members"
+			],
+			[
+				"m",
+				"memberid"
+			],
+			[
+				"Mem",
+				"MemberID"
+			],
+			[
+				"border-r",
+				"border-radius"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"Spe",
+				"Spellname"
+			],
+			[
+				"setDamage",
+				"setDamageAbility"
+			],
+			[
+				"$sta",
+				"$stateParams"
+			],
+			[
+				"name",
+				"Name"
+			],
+			[
+				"target",
+				"target"
+			],
+			[
+				"t",
+				"t"
+			],
+			[
+				"class",
+				"classString"
+			],
+			[
+				"string",
+				"string"
+			],
+			[
+				"a",
+				"ability"
+			],
+			[
+				"Damage",
+				"DamageData"
+			],
+			[
+				"guid",
+				"guid"
+			],
+			[
+				"tat",
+				"targetUnits"
+			],
+			[
+				"sou",
+				"sourceUnits"
+			],
+			[
+				"retun",
+				"returnSlice"
+			],
+			[
+				"damae",
+				"damageToTarget"
+			],
+			[
+				"Encounter",
+				"EncounterData"
+			],
+			[
+				"Encounte",
+				"EncounterData"
+			],
+			[
+				"n",
+				"name"
+			],
+			[
+				"Pr",
+				"Print"
+			],
+			[
+				"pla",
+				"playerDamage"
+			],
+			[
+				"resp",
+				"response"
+			],
+			[
+				"RESTD",
+				"RESTDamageSourceUnit"
+			],
+			[
+				"true",
+				"true"
+			],
+			[
+				"int",
+				"int"
+			],
+			[
+				"h",
+				"hostile"
+			],
+			[
+				"e",
+				"encounters"
+			],
+			[
+				"enco",
+				"encounter"
+			],
+			[
+				"ret",
+				"retunMap"
+			],
+			[
+				"u",
+				"u"
+			],
+			[
+				"l",
+				"l"
+			],
+			[
+				"p",
+				"p"
+			],
+			[
+				"rest",
+				"restUnitInfo"
+			],
+			[
+				"Pri",
+				"Printf"
+			],
+			[
+				"Dmg",
+				"DmgAppState"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "Package Control: ",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 472.0
+	},
+	"console":
+	{
+		"height": 273.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Z/sust/dist/get_session.php",
+		"/Z/sust/app/data.js",
+		"/Z/sust/webpack.config.js",
+		"/Z/sust/app/dispatcher.js",
+		"/Z/sust/dist/results.php",
+		"/Z/sust/app/store.js",
+		"/Z/sust/dist/save.php",
+		"/Z/sust/dist/css/main.css",
+		"/Z/sust/.gitignore",
+		"/Z/sust/dist/index.html",
+		"/Z/sust/app/app.jsx",
+		"/Z/sust/dist/css/bootstrap.min.print.css",
+		"/Z/sust/node_modules/webpack.config.js",
+		"/Z/STV/package.json",
+		"/Z/STV/app/component.jsx",
+		"/Z/STV/app/app.jsx",
+		"/Z/STV/dist/index.html",
+		"/Z/STV/webpack.config.js",
+		"/Z/go/src/ralphsleigh/subs/.gitignore",
+		"/Z/go/src/ralphsleigh/subs/js/node_modules/rc-calendar/lib/month/MonthPanel.js",
+		"/Z/go/src/ralphsleigh/subs/files/js/app.js",
+		"/Z/go/src/ralphsleigh/subs/files/js/app.jsx",
+		"/Z/go/src/ralphsleigh/subs/files/js/npm-debug.log",
+		"/Z/go/src/ralphsleigh/subs/files/js/helloworld.js",
+		"/Z/site/index.html",
+		"/Z/site/game.js",
+		"/Z/go/src/ralphsleigh/gowowlog/parse.go",
+		"/Z/go/src/ralphsleigh/gowowlog/webfiles/js/services.js",
+		"/Z/go/src/ralphsleigh/gowowlog/webfiles/partials/damageTargets.html",
+		"/Z/go/src/ralphsleigh/gowowlog/webfiles/partials/damageSources.html",
+		"/Z/go/src/ralphsleigh/gowowlog/webfiles/partials/damagePlayerList.html",
+		"/Z/go/src/ralphsleigh/gowowlog/webfiles/js/config.js",
+		"/Z/go/src/ralphsleigh/gowowlog/webfiles/style.css",
+		"/Z/go/src/ralphsleigh/gowowlog/webfiles/partials/home.html",
+		"/Z/go/src/ralphsleigh/gowowlog/webfiles/js/controllers.js",
+		"/Z/go/src/ralphsleigh/gowowlog/webfiles/partials/damageAbilities.html",
+		"/Z/go/src/ralphsleigh/gowowlog/webfiles/partials/damageMenu.html",
+		"/Z/go/src/ralphsleigh/gowowlog/rest.go",
+		"/Z/go/src/ralphsleigh/gowowlog/readme.md",
+		"/Z/go/src/ralphsleigh/gowowlog/main.go",
+		"/Z/go/src/ralphsleigh/gowowlog/calculate.go",
+		"/Z/go/src/ralphsleigh/gowowlog/webfiles/index.html",
+		"/Z/go/src/ralphsleigh/gowowlog/webfiles/js/directives.js",
+		"/Z/go/src/ralphsleigh/gowowlog/webfiles/partials/damageArea.html",
+		"/C/Users/Ralph/AppData/Roaming/Sublime Text 3/Packages/AngularJS/AngularJS-completions.sublime-settings",
+		"/C/Users/Ralph/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Ralph/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"-xs-",
+			"sx-",
+			"-sm-",
+			"-md-",
+			"member",
+			"Melee",
+			"FilterUnits",
+			"color",
+			"background",
+			".bg"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"-sm-",
+			"-smx-",
+			"-sm-",
+			"session",
+			"background",
+			"color",
+			".colour"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "server.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"DamageT",
+				"damageTargetTable"
+			]
+		],
+		"width": 392.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 333.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

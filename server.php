@@ -13,7 +13,7 @@ require "config.php";
 
 //THIS BIT RUNS.
 
-$a = new \Auryn\Provider;
+$a = new \Auryn\Injector;
 //this is kind of ugly, should be a better way to configure the logger.
 $logger = new \Monolog\Logger('log');
 $handle = new \Monolog\Handler\StreamHandler('php://stdout');
