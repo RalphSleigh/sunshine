@@ -1,6 +1,7 @@
 <?php
 namespace Ralphie\Sunshine;
 use \stdClass;
+use \Michelf\MarkdownExtra;
 
 class SlideController {
 
@@ -40,6 +41,10 @@ class SlideController {
 		$file = file_get_contents($msg->slideId);
 		$conn->slideId = $msg->slideId; // store this to display later.
 		
+
+		if(strpos($msg->slideId, '.md')) {
+			$file = MarkdownExtra::defaultTransform($file);
+		}
 		$obj = new \StdClass;
 		$obj->action = 'slide.displaySlide';
 		$obj->context = 'preview';
