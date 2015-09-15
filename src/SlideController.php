@@ -70,6 +70,10 @@ class SlideController {
 	
 		if(!$conn->slideId) return; //Nope!
 		$file = file_get_contents($conn->slideId);
+
+		if(strpos($conn->slideId, '.md')) {
+			$file = MarkdownExtra::defaultTransform($file);
+		}
 		
 		$obj = new \StdClass;
 		$obj->action = 'slide.displaySlide';

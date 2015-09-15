@@ -2,3 +2,4 @@ vendor/
 chat.txt
 slides*/
 config.php
+*.sublime-workspace
